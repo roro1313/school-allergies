@@ -1,0 +1,15 @@
+{
+  "name": "allergies-server",
+  "version": "1.0.0",
+  "description": "server for a web application project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Creative Commons Attribution-NonCommercial 4.0 International License",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  }
+}
