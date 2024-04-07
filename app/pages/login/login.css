@@ -1,0 +1,79 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+     height: 400px;
+     background-image: url("fotofondo.jpg");
+   background-size: cover;
+     background-repeat:no-repeat;
+     background-position: center center;.
+     style=”background-color:#33475b;
+   }
+ 
+ 
+   h4{font-size: 2em;}
+   p{font-size: 1.25;}
+
+
+<style>
+   body {
+       font-family: Arial, sans-serif;
+       margin: 0;
+       padding: 0;
+   }
+
+   nav {
+       background-color: #1b4947; /* Color de fondo del menú */
+       color: #fff1f1; /* Color del texto del menú */
+       padding: 10px;
+       width: 100%; /* Ocupar todo el ancho de la ventana */
+       position: fixed; /* Fijar el menú en la parte superior */
+       top: 0; /* Alinear el menú en la parte superior */
+       z-index: 1000; /* Asegurarse de que el menú esté por encima de otros elementos */
+       text-align: center; /* Alinear elementos del menú horizontalmente */
+   }
+
+   nav ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+       display: inline-block; /* Mostrar la lista de elementos como bloque en línea */
+   }
+
+   nav ul li {
+       display: inline;
+       margin-right: 20px;
+   }
+
+   nav ul li a {
+       color: #ffc1c1; /* Color del texto de los enlaces */
+       text-decoration: none;
+   }
+
+   nav ul li a:hover {
+       text-decoration: underline;
+   }
+  
+
+
+
+/* Estilos para el botón */
+.boton-enviar {
+    display: inline-block;
+    background-color: rgb(36, 21, 132); /* Color naranja */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px;
+    border-radius: 20%; /* Forma redonda */
+    border: none;
+    cursor: pointer;
+    font-size: 21px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Estilos para el botón cuando se pasa el mouse sobre él */
+.boton-enviar:hover {
+    background-color: rgb(54, 91, 151); /* Cambio de color al pasar el mouse */
+}
