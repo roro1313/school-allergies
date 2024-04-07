@@ -9,8 +9,6 @@ app.use(bodyParser.json());
 
 // MongoDB Connection
 const MongoClient = mongodb.MongoClient;
-const url = process.env.DATABASE_URL;
-const dbName = "tfg-project";
 
 async function connectToDatabase() {
   try {
@@ -35,8 +33,19 @@ app.get("/students", async (req, res) => {
   try {
     const students = await db.collection("students").find().toArray();
     students.length === 0
-      ? res.send({ error: true, response: "No hay resultados" })
+      ? res.send({ error: true, response: "No results" })
       : res.send({ error: false, response: students });
+  } catch (error) {
+    res.send({ error: true, response: error });
+  }
+});
+
+app.post("/students", async (req, res) => {
+  try {
+    const student = await db.collection("students").findOne({ userId: req.body.userId });
+    student.length === 0
+      ? res.send({ error: true, response: "No results" })
+      : res.send({ error: false, response: student });
   } catch (error) {
     res.send({ error: true, response: error });
   }
