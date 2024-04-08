@@ -3,35 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="search.css">
+
 <title>Bienvenidos</title>
-<style>
-    .card {
-        background-color: #add8e6; /* Color azul pastel */
-        width: 200px;
-        height: 500px;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        margin: 20px;
-        float: left;
-    }
-    h2 {
-        text-align: center;
-    }
-</style>
+
 
 
 </head>
 <body>
+  <scrip src="search.js"></scrip>
 
-<div class="card">
+<div class="card-lateral">
     <h2>Bienvenidos</h2>
     <p>Desde aquí puedes consultar toda la información sobre alergias del alumno que desee.</p>
 </div>
 
 <p>    
-</nav>
-    <div class="container searchContainer">
+  <nav>
+    <div class="card-medio">
     
     
       <div class="card bg-light mb-3" style="max-width: 250em;">
@@ -40,16 +29,15 @@
         sus episodios de alergia para evitar reacciones</span>
           
           <p class="lead">Introduce el nombre del alumno</p>
-          <input type="text" id="searchUser" class="form-control "
-          placeholder="Nomnbre del alumno...">
-          
-      
+          <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre del alumno" required>
+          <button type="submit">Enviar</button>
+         </div>
       </nav>
     </p>    
 
     <div class="card">
         <h2>Información</h2>
-        <table>
+        <table>   
         
             <tr>
               <th>Nombre</th>
@@ -63,13 +51,73 @@
               <th>Alergias</th>
              <td></td> 
             </tr>
+
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                  <span class="close" onclick="closeModal()">&times;</span>
            
           </table>
 
     </div>
-
+ 
+    
 
 </div>
+
+<button onclick="openModal()">+</button>
+   
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+         
+        <h2>Añadir Alergia</h2>
+        <form id="myForm">
+            <label for="alergia">Alergia:</label>
+            <input type="text" id="alergia" name="alergia" placeholder="Introduce la alergia" required>
+            
+            <label for="fecha">Fecha de diagnóstico:</label>
+            <input type="text" id="fecha" name="fecha" placeholder="Introduce la fecha">
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Introduce una descripción"></textarea>
+            
+            <button type="submit">Guardar</button>
+        </form>
+        
+    </div>
+</div>
+
+<script>
+  
+  function openModal() {
+      document.getElementById("myModal").style.display = "block";
+  }
+
+  
+  function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+  }
+
+  
+  window.onclick = function(event) {
+      if (event.target == document.getElementById("myModal")) {
+          closeModal();
+      }
+  }
+
+  
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var alergia = document.getElementById("alergia").value;
+      var fecha = document.getElementById("fecha").value;
+      var descripcion = document.getElementById("descripcion").value;
+      
+      
+      document.getElementById("myForm").reset();
+      closeModal(); 
+  });
+</script>
 
 </body>
 <head>
