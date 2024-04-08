@@ -1,75 +1,153 @@
 const express = require("express");
+const app = express();
+require("dotenv").config();
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
-
-const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
 
 // MongoDB Connection
 const MongoClient = mongodb.MongoClient;
-const url = "mongodb+srv://username:password@your-cluster.mongodb.net/tfg-project"; // URL database connection
-const dbName = "tfg-project";
 
-// API routes
-app.get("/usuarios", async (req, res) => {
-  const client = new MongoClient(url);
+async function connectToDatabase() {
   try {
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection("usuarios");
-    const usuarios = await collection.find({}).toArray();
-    res.json(usuarios);
+    const client = await MongoClient.connect(process.env.MONGODB_URI);
+    const dbs = await client.db().admin().listDatabases();
+    dbs.length !== 0
+      ? ((db = client.db("tfg-project")),
+        console.log("🟩 Database successfully connected"))
+      : console.error(error + "🟥 Error in database connection");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al obtener usuarios" });
-  } finally {
-    await client.close();
+  }
+}
+
+connectToDatabase();
+
+app.get("/students", async (req, res) => {
+  if (!db) {
+    return res.send({ error: true, response: "🟥 Database not connected" });
+  }
+
+  try {
+    const students = await db.collection("students").find().toArray();
+    students.length === 0
+      ? res.send({ error: true, response: "No results" })
+      : res.send({ error: false, response: students });
+  } catch (error) {
+    res.send({ error: true, response: error });
   }
 });
 
-app.get("/usuarios/:id", async (req, res) => {
-  const { id } = req.params;
-  const client = new MongoClient(url);
+app.post("/students", async (req, res) => {
   try {
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection("usuarios");
-    const usuario = await collection.findOne({ _id: mongodb.ObjectID(id) });
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    const student = await db.collection("students").findOne({ userId: req.body.userId });
+    student.length === 0
+      ? res.send({ error: true, response: "No results" })
+      : res.send({ error: false, response: student });
+  } catch (error) {
+    res.send({ error: true, response: error });
+  }
+});
+
+app.post("/students/new-student", async (req, res) => {
+  try {
+    const newStudent = await db.collection("students").insertOne({
+      studentName: req.body.studentName,
+      studentSurname: req.body.studentSurname,
+      studentBirth: req.body.studentBirth,
+      studentGrade: req.body.studentGrade,
+      allergies: [],
+      userId: req.body.studentName + req.body.studentSurname.substring(0, 2),
+    });
+
+    res.json({
+      error: false,
+      response: newStudent,
+      message: "Student successfully created",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: true,
+      response: error,
+      message: "Student not created",
+    });
+  }
+});
+
+app.post("/students/new-allergy", async (req, res) => {
+  try {
+    const newAllergy = await db.collection("students").updateOne(
+      { userId: req.body.userId },
+      {
+        $push: {
+          allergies: {
+            allergy: req.body.allergy,
+            medication: req.body.medication,
+            crisis: [],
+          },
+        },
+      }
+    );
+
+    if (newAllergy.modifiedCount === 0) {
+      throw new Error("Allergy can not be created, userId not found " + req.body.userId);
     }
-    res.json(usuario);
+
+    res.json({
+      error: false,
+      message: "Allergy successfully created",
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al obtener usuario" });
-  } finally {
-    await client.close();
+    res.status(500).json({
+      error: true,
+      message: "Error al crear la alergia",
+    });
   }
 });
 
-app.post("/usuarios", async (req, res) => {
-  const nuevoUsuario = req.body;
-  const client = new MongoClient(url);
+app.post("/students/new-crisis", async (req, res) => {
   try {
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection("usuarios");
-    const resultado = await collection.insertOne(nuevoUsuario);
-    res.status(201).json(resultado.ops[0]);
+    const newCrisis = await db.collection("students").updateOne(
+      { userId: req.body.userId, "allergies.allergy": req.body.allergy },
+      {
+        $push: {
+          "allergies.$.crisis": {
+                type: req.body.type,
+                timestamp: req.body.timestamp,
+                information: req.body.information,
+          },
+        },
+      }
+    );
+
+    if (newCrisis.modifiedCount === 0) {
+      throw new Error("Crisis can not be created, userId not found " + req.body.userId);
+    }
+
+    res.json({
+      error: false,
+      message: "Crisis successfully created",
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al crear usuario" });
-  } finally {
-    await client.close();
+    res.status(500).json({
+      error: true,
+      message: "Error creating crisis",
+    });
   }
 });
 
-// Otras rutas para editar y eliminar usuarios
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en el puerto ${PORT}`);
+app.listen(process.env.PORT || 3000, (e) => {
+  e
+    ? console.error("🟥 Server not connected")
+    : console.log("🟩 Server connected in " + process.env.PORT || 3000);
 });
+
+/* contact: [
+  { id: mongodb.ObjectId(), name: "nombre", relationship: "mom", phone: "phone" },
+  { id: mongodb.ObjectId(), name: "nombre", relationship: "dad", phone: "phone" },
+]; */
