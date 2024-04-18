@@ -3,9 +3,39 @@ const app = express();
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
+const jwt = require('jsonwebtoken');
 
-// Middleware
+//app.use(express.static("public"));
+
+// Middleware para habilitar CORS
+function enableCors(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Permite todas las solicitudes de cualquier origen
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Métodos permitidos
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Encabezados permitidos
+}
+
+// JWT authentication middleware
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) return res.status(401).send({ error: true, message: 'Unauthorized' });
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    next();
+  } catch (err) {
+    return res.status(403).send({ error: true, message: 'Forbidden' });
+  }
+}
+
+// Middleware de análisis de cuerpo de solicitud
 app.use(bodyParser.json());
+
+// Middleware CORS
+app.use(enableCors);
+
 
 // MongoDB Connection
 const MongoClient = mongodb.MongoClient;
@@ -25,7 +55,25 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-app.get("/students", async (req, res) => {
+// LOGIN
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const userData = await db.collection("user-data-login").findOne({ username, password });
+    if (!userData) {
+      return res.status(401).json({ error: true, message: "🟥 Invalid username or password" });
+    }
+
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: true, message: "🟥 Internal server error" });
+  }
+});
+
+app.get("/students", authenticateToken, async (req, res) => {
   if (!db) {
     return res.send({ error: true, response: "🟥 Database not connected" });
   }
@@ -40,7 +88,7 @@ app.get("/students", async (req, res) => {
   }
 });
 
-app.post("/students", async (req, res) => {
+app.post("/students", authenticateToken, async (req, res) => {
   try {
     const student = await db.collection("students").findOne({ userId: req.body.userId });
     student.length === 0
@@ -51,7 +99,7 @@ app.post("/students", async (req, res) => {
   }
 });
 
-app.post("/students/new-student", async (req, res) => {
+app.post("/students/new-student", authenticateToken, async (req, res) => {
   try {
     const newStudent = await db.collection("students").insertOne({
       studentName: req.body.studentName,
@@ -77,7 +125,7 @@ app.post("/students/new-student", async (req, res) => {
   }
 });
 
-app.post("/students/new-allergy", async (req, res) => {
+app.post("/students/new-allergy", authenticateToken, async (req, res) => {
   try {
     const newAllergy = await db.collection("students").updateOne(
       { userId: req.body.userId },
@@ -109,7 +157,7 @@ app.post("/students/new-allergy", async (req, res) => {
   }
 });
 
-app.post("/students/new-crisis", async (req, res) => {
+app.post("/students/new-crisis", authenticateToken, async (req, res) => {
   try {
     const newCrisis = await db.collection("students").updateOne(
       { userId: req.body.userId, "allergies.allergy": req.body.allergy },
