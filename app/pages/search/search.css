@@ -10,7 +10,21 @@
     }
     h2 {
         text-align: center;
+
     }
+
+    .table-container {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        border-collapse: collapse; /* Borde de la tabla */
+        position: fixed; /* Fijar la tabla en la parte superior */
+        font-size: 18px; /* Tamaño de la fuente de la tabla */
+        display: flex; /* Utilizamos flexbox para centrar vertical y horizontalmente */
+        justify-content: center; /* Centramos horizontalmente */
+        height: 100vh; /* Altura del contenedor, 100% del viewport */
+    }
+
+
+
     .card-medio {
         max-width: 400px;
         margin: 0 auto;
@@ -30,6 +44,21 @@
         border-radius: 5px;
         box-sizing: border-box;
     }
+
+    table {
+        border-collapse: collapse;
+        width: 50%;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+        padding: 30px;
+    }
+
     button {
         padding: 10px 20px;
         background-color: #007bff;
@@ -41,3 +70,27 @@
     button:hover {
         background-color: #0056b3;
     }
+    .modal {
+        display: none; /* Ocultar por defecto */
+        position: relative;
+        width: 50vw; /* Tamaño del modal (mitad del tamaño de la ventana) */
+        height: 50vw; /* Tamaño del modal (mitad del tamaño de la ventana) */
+      }
+
+    .modal-container {
+        background-color: #fefefe;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+.show {
+   pointer-events: : auto;
+   opacity: 1;
+}
+
+   
+    </style>
+    </head>
+    <body>
