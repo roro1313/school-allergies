@@ -35,40 +35,35 @@
       </nav>
     </p>    
    
-    <div class="table-container">
-      <div class="card">
-        <h2>Información</h2>
-        <table>   
-            <tr>
-              <th>Nombre</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Apellidos</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Alergias</th>
-              <td></td> 
-            </tr>
-        </table>
+   
+ 
+    <button id="open-modal-button" onclick="openModal()">Abrir modal</button>
+    <div id="modal-detail" class="modal">
+      <div class="modal-content">
+       
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>
+            <h2>Añadir Alergia</h2>
+            <form id="myForm">
+                <label for="alergia">Alergia:</label>
+                <input type="text" id="alergia" name="alergia" placeholder="Introduce la alergia" required>
+                
+                <label for="fecha">Fecha de diagnóstico:</label>
+                <input type="text" id="fecha" name="fecha" placeholder="Introduce la fecha">
+    
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Introduce una descripción"></textarea>
+                
+                <button type="submit">Guardar</button>
+            </form>
+            
+        </div>
+    </div>
+    
+        </p>
       </div>
     </div>
-      
-
-     <button id="openModal" onclick="alert('hola')">Abrir Modal</button>
-     
-     
-     <div class="modal-container" id="modal_container">
-      <div class="modal">
-          <h1>Ventana Modal</h1>
-          <p>
-              Párrafo de dentro
-          </p>
-          <button id="close">Cerrar</button>
-      </div>
-  </div>
-  <script src="script.js"></script>
+  <script src="search-modal.js"></script>
 </body>
     <body>
     
