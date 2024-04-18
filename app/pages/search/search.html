@@ -34,11 +34,11 @@
          </div>
       </nav>
     </p>    
-
-    <div class="card">
+   
+    <div class="table-container">
+      <div class="card">
         <h2>Información</h2>
         <table>   
-        
             <tr>
               <th>Nombre</th>
               <td></td>
@@ -49,96 +49,27 @@
             </tr>
             <tr>
               <th>Alergias</th>
-             <td></td> 
+              <td></td> 
             </tr>
-
-            <div id="myModal" class="modal">
-              <div class="modal-content">
-                  <span class="close" onclick="closeModal()">&times;</span>
-           
-          </table>
-
+        </table>
+      </div>
     </div>
- 
-    
-
-</div>
-
-<button onclick="openModal()">+</button>
-   
-<!-- Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-         
-        <h2>Añadir Alergia</h2>
-        <form id="myForm">
-            <label for="alergia">Alergia:</label>
-            <input type="text" id="alergia" name="alergia" placeholder="Introduce la alergia" required>
-            
-            <label for="fecha">Fecha de diagnóstico:</label>
-            <input type="text" id="fecha" name="fecha" placeholder="Introduce la fecha">
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" placeholder="Introduce una descripción"></textarea>
-            
-            <button type="submit">Guardar</button>
-        </form>
-        
-    </div>
-</div>
-
-<script>
-  
-  function openModal() {
-      document.getElementById("myModal").style.display = "block";
-  }
-
-  
-  function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-  }
-
-  
-  window.onclick = function(event) {
-      if (event.target == document.getElementById("myModal")) {
-          closeModal();
-      }
-  }
-
-  
-  document.getElementById("myForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      var alergia = document.getElementById("alergia").value;
-      var fecha = document.getElementById("fecha").value;
-      var descripcion = document.getElementById("descripcion").value;
       
-      
-      document.getElementById("myForm").reset();
-      closeModal(); 
-  });
-</script>
 
+     <button id="openModal" onclick="alert('hola')">Abrir Modal</button>
+     
+     
+     <div class="modal-container" id="modal_container">
+      <div class="modal">
+          <h1>Ventana Modal</h1>
+          <p>
+              Párrafo de dentro
+          </p>
+          <button id="close">Cerrar</button>
+      </div>
+  </div>
+  <script src="script.js"></script>
 </body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de Usuarios</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 50%;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-    </head>
     <body>
     
        
