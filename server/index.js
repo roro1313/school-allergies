@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const mongodb = require("mongodb");
 const jwt = require('jsonwebtoken');
 
@@ -33,8 +34,8 @@ function authenticateToken(req, res, next) {
 // Middleware de análisis de cuerpo de solicitud
 app.use(bodyParser.json());
 
-// Middleware CORS
-app.use(enableCors);
+app.use(express.json());
+app.use(cors());
 
 
 // MongoDB Connection
@@ -57,15 +58,15 @@ connectToDatabase();
 
 // LOGIN
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  /* const { username, password } = req.body; */
 
   try {
-    const userData = await db.collection("user-data-login").findOne({ username, password });
+    const userData = await db.collection("user-data-login").findOne({ username: req.body.username, password: req.body.password });
     if (!userData) {
       return res.status(401).json({ error: true, message: "🟥 Invalid username or password" });
     }
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username: req.body.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
     console.error(error);
