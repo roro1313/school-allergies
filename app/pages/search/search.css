@@ -1,3 +1,11 @@
+.body {
+  background-color: aqua;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+}
+
 .card-lateral {
   background-color: #add8e6; /* Color azul pastel */
   width: 200px;
@@ -100,72 +108,3 @@ th {
   padding: 30px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #0056b3;
-}
-.modal {
-  display: none; /* Ocultar por defecto */
-  position: relative;
-  width: 50vw; /* Tamaño del modal (mitad del tamaño de la ventana) */
-  height: 50vw; /* Tamaño del modal (mitad del tamaño de la ventana) */
-}
-
-.modal-container {
-  background-color: #fefefe;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.show {
-  pointer-events: auto;
-  opacity: 1;
-}
-
-
-/* MODAL */
-/* Aquí definimos los estilos del modal, dejándolo oculto por defecto */
-.modal {
-    display: none; /* Ocultamos el modal por defecto, para controlar su visibilidad con las funciones openModal() y closeModal() del archivo search-modal.js */
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  /* Estos son los estilos del contenido del modal */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  /* Estos son los estilos del botón X de cerrar */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  /* Estos son los estilos del botón X de cerrar cuando pasamos el ratón por encima */
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
