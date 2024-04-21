@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="detail.css">
+    <title>Título de la página</title>
+</head>
+<body>
+
+
+    <div class="card-lateral">
+        <h2>Perfil de Usuario</h2>
+        <img src="mujer.png" alt="Foto de usuario">
+
+        <ul class="contact-info">
+            <li><strong>Fecha de nacimiento:</strong> XXX</li>
+            <li><strong>Clase / grupo:</strong> XXX</li>
+            <li><strong>Contactos de emergencia:</strong></li>
+            <li><strong>Teléfono 1:</strong> XXXX</li>
+            <li><strong>Teléfono 2:</strong> XXX</li>
+        </ul>
+    </div>
+    </div>
+
+ <div class="diseño">
+    <h3>
+        <p>
+       Información alergia:</p> 
+       <p2> Medicación:</p2>
+     </h3> 
+        
+    <table>
+     <tr>
+       <td>Tipo de Crisis</td> 
+       <td>Fecha</td> 
+       <td>Información</td>
+       </tr>
+    
+     <td>DATO 1</td>   
+     <td>DATO 2</td>
+     <td>DATO 3</td>
+    </table>
+ </div>  
+
+ <div class="tablados">
+  <h3>
+     <p>
+    Información alergia:</p> 
+    <p2> Medicación:</p2>
+  </h3> 
+    
+    <table>
+     <tr>
+       <td>Tipo de Crisis</td> 
+       <td>Fecha</td> 
+       <td>Información</td>
+       </tr>
+    
+     <td>DATO 1</td>   
+     <td>DATO 2</td>
+     <td>DATO 3</td>
+    </table>
+ </div>  
+ 
+
+ <div>
+    <button id="open-modal-button" onclick="openModal()">AÑADIR ALERGIAS</button>
+    <div id="modal-detail" class="modal">
+      <div class="modal-content">
+       
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>
+            <h2>Añadir Alergia</h2>
+            <form id="myForm">
+                <label for="alergia">Alergia:</label>
+                <input type="text" id="alergia" name="alergia" placeholder="Introduce la alergia" required>
+                
+                <label for="fecha">Fecha de diagnóstico:</label>
+                <input type="text" id="fecha" name="fecha" placeholder="Introduce la fecha">
+    
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Introduce una descripción"></textarea>
+                
+                <button type="submit">Guardar</button>
+            </form>
+            
+        </div>
+    </div>
+  </div>
+    
+        </p>
+      </div>
+    </div>
+
+  <p>
+    <div>
+        <button id="open-modal-button" onclick="openModal()"> AÑADIR NUEVAS CRISIS</button>
+        <div id="modal1" class="modal">
+          <div class="modal-content1">
+           
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>
+                <h2>Añadir Episodios</h2> 
+                <form id="myForm">
+                    <label for="alergia">Alergia:</label>
+                    <input type="text" id="alergia" name="Crisis" placeholder="Introduce la crisis" required>
+                    
+                    <label for="fecha">Tipo de crisis:</label>
+                    <input type="text" id="fecha" name="fecha" placeholder="Introduce el tipo">
+        
+                    <label for="descripcion">Información adicional:</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Más info"></textarea>
+                    
+                    <button type="submit">Guardar</button>
+                </form>
+                
+            </div>
+        </div>
+      </div>
+        
+            </p>
+          </div>
+        </div>
+       
+  <script src="detail.js"></script>
+</body>
+    <body>
+    
+       
+    
+</html>
