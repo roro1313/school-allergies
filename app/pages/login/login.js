@@ -18,7 +18,7 @@ const options = {
 
 fetch(urlLogin, options)
   .then(response => {
-    if (response.!response.error===false)  {
+    if (!response.error===false)  {
       console.log('Inicio de sesión exitoso');
       // Realizar acciones adicionales después de iniciar sesión correctamente
     } else {
