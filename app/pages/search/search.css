@@ -1,10 +1,21 @@
 .body {
-  background-color: aqua;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+  
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 200px;
+  width: 100%;
+  height: 100%;
+  background-image: url('fondito.jpg'); /* Ruta de tu imagen de fondo */
   background-size: cover;
   background-position: center;
+  z-index: -1; 
 }
+  
 
 .card-lateral {
   background-color: #add8e6; /* Color azul pastel */
@@ -20,12 +31,11 @@ h2 {
   text-align: center;
 }
 .card-medio {
-  max-width: 400px;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  background-color: #f9f9f9;
+   background-color: #f9f9f9;
+  position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 label {
   display: block;
