@@ -26,7 +26,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 20px;
   float: left;
+  
 }
+
+.card-lateral img {
+ width: 150%; /* Ancho máximo de la imagen */
+ max-height: 400px; /* Máxima altura de la imagen */
+}
+
 h2 {
   text-align: center;
 }
