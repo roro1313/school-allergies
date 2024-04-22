@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="detail.css">
     <title>Título de la página</title>
 </head>
-<body>
+<body class="background-image"></body>>
 
 
     <div class="card-lateral">
@@ -84,20 +84,18 @@
                 
                 <button type="submit">Guardar</button>
             </form>
-            
-        </div>
-    </div>
-  </div>
-    
-        </p>
+          </div>
+         </div>
       </div>
-    </div>
+      </p>
+     </div>
+   </div>
 
-  <p>
-    <div>
+  
+    <div id="modal2" class="modal"></div>
         <button id="open-modal-button" onclick="openModal()"> AÑADIR NUEVAS CRISIS</button>
-        <div id="modal1" class="modal">
-          <div class="modal-content1">
+        <div id="modal-contentuno" class="modal">
+          <div class="modal-contentuno">
            
             <span class="close" onclick="closeModal()">&times;</span>
             <p>
@@ -111,7 +109,8 @@
         
                     <label for="descripcion">Información adicional:</label>
                     <textarea id="descripcion" name="descripcion" placeholder="Más info"></textarea>
-                    
+                </form>   
+            </p>
                     <button type="submit">Guardar</button>
                 </form>
                 
@@ -119,11 +118,12 @@
         </div>
       </div>
         
-            </p>
+            
           </div>
         </div>
        
   <script src="detail.js"></script>
+
 </body>
     <body>
     
