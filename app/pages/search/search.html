@@ -10,32 +10,39 @@
     <div class="container">
         <div class="sidebar">
             <!-- Logo -->
-            <img src="logo.png" alt="Logo" width="100%">
-            <!-- Welcome message -->
+            <img src="https://placehold.co/100x100" alt="Logo">
+            <!-- Sidebar -->
             <h4>Welcome</h4>
-            <p>Consulta la información</p>
+            <p>Here you can search for profiles in order to see allergies and more information</p>
         </div>
         <div class="main-content">
             <!-- Main title -->
             <h1>Search Profiles</h1>
             <!-- Search input -->
             <form id="searchForm">
-                <input type="text" id="searchInput" class="search-input" placeholder="Introduce un nombre para buscar perfiles">
-                <button onclick="searchStudents()">Buscar</button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Type a to start search">
+                <button type="button" onclick="searchStudents()">🔍</button>
             </form>
+            <div id="errorMessage"></div>
             <!-- Results table -->
             <table id="resultsTable">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Alergias</th>
+                        <th>Name</th>
+                        <th>Lastname</th>
+                        <th>Allergies</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Aquí se insertarán los resultados de búsqueda -->
+                <tbody id="tableBody">
+                    <!-- Search results will be printed here from JavaScript -->
                 </tbody>
             </table>
+            <!-- + Button with menu -->
+            <button class="plus-menu" onclick="toggleMenu()">+</button>
+            <ul class="speed-dial" id="speedDial">
+                <li class="speed-dial-item">Add Allergy</li>
+                <li class="speed-dial-item">Add Crisis</li>
+            </ul>
         </div>
     </div>
     <script src="search.js"></script>

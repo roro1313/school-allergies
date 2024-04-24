@@ -1,39 +1,56 @@
 async function searchStudents() {
     const searchValue = document.getElementById("searchInput").value;
+    const token = localStorage.getItem("token");
   
     try {
-      const response = await fetch("http://localhost:3003/students", {
+      const response = await fetch("https://school-allergies.onrender.com/students", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({ userId: searchValue })
       });
   
       const data = await response.json();
   
-      if (response.error === false) {
+      if (response.ok) {
         displayStudents(data.response);
       } else {
-        alert(data.response); // Mostrar mensaje de error si la búsqueda falla
+        console.log(data.response); // Show error message if search fails
       }
     } catch (error) {
       console.error(error);
-      console.error("An error occurred. Please try again later."); // Mostrar mensaje de error genérico
+      console.error("An error occurred. Please try again later."); // Show error message
     }
   }
   
   function displayStudents(students) {
     const tableBody = document.getElementById("tableBody");
-    tableBody.innerHTML = ""; // Limpiar filas existentes antes de mostrar nuevos resultados
-  
+    tableBody.innerHTML = ""; // Clean table before print new results
+    // Pick student info and print them in a table row
+    // Pick all allergies and join them in a cell
     students.map(student => {
       const row = `<tr>
                     <td>${student.studentName}</td>
                     <td>${student.studentSurname}</td>
-                    <td>${student.allergies.join(", ")}</td>
+                    <td>${student.allergies.map(allergyObj => allergyObj.allergy).join(", ")}</td>
                   </tr>`;
-      tableBody.innerHTML += row; // Agregar fila a la tabla
+      tableBody.innerHTML += row; // Add table row
     });
   }
+
+
+function toggleMenu() {
+  const speedDial = document.getElementById("speedDial");
+  speedDial.classList.toggle("active");
+}
+// Manage clicks outside the plus menu
+window.addEventListener("click", function(event) {
+  const speedDial = document.getElementById("speedDial");
+  if (!event.target.matches('.plus-menu')) {
+      speedDial.classList.remove("active");
+  }
+});
+
   

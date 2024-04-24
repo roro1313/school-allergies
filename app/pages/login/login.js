@@ -3,7 +3,7 @@ async function login() {
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:3003/login", {
+        const response = await fetch("https://school-allergies.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -13,11 +13,12 @@ async function login() {
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (!response.error) {
             localStorage.setItem("token", data.token);
             document.getElementById("errorMessage").innerText = data.message;
             setTimeout(() => {
-                window.location.href = "file:///C:/Users/Rocío/Desktop/school-allergies/app/pages/search/search.html";
+                // Redirect to search.html page when the user is logged
+                window.location.href = "../search/search.html";
             }, 1000);
         } else {
             document.getElementById("errorMessage").innerText = data.message;
