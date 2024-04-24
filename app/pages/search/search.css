@@ -57,6 +57,11 @@ th, td {
     text-align: left;
 }
 
+tr:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
 th {
     background-color: #f2f2f2;
 }

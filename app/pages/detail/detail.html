@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Detail</title>
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Logo -->
+            <img src="https://placehold.co/100x100" alt="Logo">
+            <!-- Sidebar -->
+            <h4>Welcome</h4>
+            <p>Here you can see al the information of the student</p>
+        </div>
+        <div class="main-content">
+            <!-- Table container -->
+            <div id="tableContainer">
+                <!-- Tables will be dynamically added here -->
+            </div>
+            <!-- + Button with menu -->
+            <button class="plus-menu" onclick="toggleMenu()">+</button>
+            <ul class="speed-dial" id="speedDial">
+                <li class="speed-dial-item">Add Allergy</li>
+                <li class="speed-dial-item">Add Crisis</li>
+            </ul>
+        </div>
+    </div>
+    <script src="detail.js"></script>
+</body>
+</html>
