@@ -43,6 +43,3 @@ function mostrarError(mensaje) {
     const resultadoBusqueda = document.getElementById('resultadoBusqueda');
     resultadoBusqueda.innerHTML = `<p>${mensaje}</p>`;
 }
-</script>
-</body>
-</html>
