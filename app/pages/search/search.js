@@ -38,9 +38,9 @@ function mostrarInformacionAlumno(alumno) {
 
 // Ejemplo de cómo llamar a la función buscarAlumno al introducir el nombre del alumno en algún campo de entrada
 const nombreInput = document.getElementById('nombreAlumnoInput'); // Suponiendo que tengas un campo de entrada con el ID 'nombreAlumnoInput'
-const botonBuscar = document.getElementById('botonBuscar'); // Suponiendo que tengas un botón con el ID 'botonBuscar'
+const botonBuscar = document.getElementById('botonEnviar'); // Suponiendo que tengas un botón con el ID 'botonBuscar'
 
-botonBuscar.addEventListener('click', () => {
+botonEnviar.addEventListener('click', () => {
   const nombreAlumno = nombreInput.value;
   if (nombreAlumno) {
       buscarAlumno(nombreAlumno);
