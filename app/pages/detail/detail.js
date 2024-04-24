@@ -70,3 +70,14 @@ async function studentDetail() {
     });
   }
   
+  function toggleMenu() {
+    const speedDial = document.getElementById("speedDial");
+    speedDial.classList.toggle("active");
+  }
+  // Manage clicks outside the plus menu
+  window.addEventListener("click", function (event) {
+    const speedDial = document.getElementById("speedDial");
+    if (!event.target.matches(".plus-menu")) {
+      speedDial.classList.remove("active");
+    }
+  });
