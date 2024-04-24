@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 //app.use(express.static("public"));
 
-// Middleware para habilitar CORS
+// Middleware for CORS enabling
 function enableCors(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*'); // Permite todas las solicitudes de cualquier origen
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Métodos permitidos
@@ -31,7 +31,7 @@ function authenticateToken(req, res, next) {
   }
 }
 
-// Middleware de análisis de cuerpo de solicitud
+// Middleware bodyparser
 app.use(bodyParser.json());
 
 app.use(express.json());
@@ -58,16 +58,20 @@ connectToDatabase();
 
 // LOGIN
 app.post("/login", async (req, res) => {
-  /* const { username, password } = req.body; */
+  const { username, password } = req.body;
 
   try {
-    const userData = await db.collection("user-data-login").findOne({ username: req.body.username, password: req.body.password });
+    if (!username || !password) {
+      return res.status(400).json({ error: true, message: "🟥 Username and password are required" });
+    }
+
+    const userData = await db.collection("user-data-login").findOne({ username, password });
     if (!userData) {
       return res.status(401).json({ error: true, message: "🟥 Invalid username or password" });
     }
 
-    const token = jwt.sign({ username: req.body.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ error: false, message: "Login successful", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: true, message: "🟥 Internal server error" });
@@ -91,14 +95,19 @@ app.get("/students", authenticateToken, async (req, res) => {
 
 app.post("/students", authenticateToken, async (req, res) => {
   try {
-    const student = await db.collection("students").findOne({ userId: req.body.userId });
-    student.length === 0
-      ? res.send({ error: true, response: "No results" })
-      : res.send({ error: false, response: student });
+    const searchQuery = { userId: { $regex: req.body.userId, $options: 'i' } }; 
+    const students = await db.collection("students").find(searchQuery).toArray();
+    
+    if (students.length === 0) {
+      res.send({ error: true, response: "No results" });
+    } else {
+      res.send({ error: false, response: students });
+    }
   } catch (error) {
     res.send({ error: true, response: error });
   }
 });
+
 
 app.post("/students/new-student", authenticateToken, async (req, res) => {
   try {
