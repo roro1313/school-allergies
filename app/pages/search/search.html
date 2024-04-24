@@ -1,146 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="search.css">
-
-<title>Bienvenidos</title>
-
-
-
-</head>
-<body>
-  <scrip src="search.js"></scrip>
-
-<div class="card-lateral">
-    <h2>Bienvenidos</h2>
-    <p>Desde aquí puedes consultar toda la información sobre alergias del alumno que desee.</p>
-</div>
-
-<p>    
-  <nav>
-    <div class="card-medio">
-    
-    
-      <div class="card bg-light mb-3" style="max-width: 250em;">
-      
-      <span style="font-size: xx-large;">Busca el nombre del alumno del cual quieres saber 
-        sus episodios de alergia para evitar reacciones</span>
-          
-          <p class="lead">Introduce el nombre del alumno</p>
-          <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre del alumno" required>
-          <button type="submit">Enviar</button>
-         </div>
-      </nav>
-    </p>    
-
-    <div class="card">
-        <h2>Información</h2>
-        <table>   
-        
-            <tr>
-              <th>Nombre</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Apellidos</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Alergias</th>
-             <td></td> 
-            </tr>
-
-            <div id="myModal" class="modal">
-              <div class="modal-content">
-                  <span class="close" onclick="closeModal()">&times;</span>
-           
-          </table>
-
-    </div>
- 
-    
-
-</div>
-
-<button onclick="openModal()">+</button>
-   
-<!-- Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-         
-        <h2>Añadir Alergia</h2>
-        <form id="myForm">
-            <label for="alergia">Alergia:</label>
-            <input type="text" id="alergia" name="alergia" placeholder="Introduce la alergia" required>
-            
-            <label for="fecha">Fecha de diagnóstico:</label>
-            <input type="text" id="fecha" name="fecha" placeholder="Introduce la fecha">
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" placeholder="Introduce una descripción"></textarea>
-            
-            <button type="submit">Guardar</button>
-        </form>
-        
-    </div>
-</div>
-
-<script>
-  
-  function openModal() {
-      document.getElementById("myModal").style.display = "block";
-  }
-
-  
-  function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-  }
-
-  
-  window.onclick = function(event) {
-      if (event.target == document.getElementById("myModal")) {
-          closeModal();
-      }
-  }
-
-  
-  document.getElementById("myForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      var alergia = document.getElementById("alergia").value;
-      var fecha = document.getElementById("fecha").value;
-      var descripcion = document.getElementById("descripcion").value;
-      
-      
-      document.getElementById("myForm").reset();
-      closeModal(); 
-  });
-</script>
-
-</body>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de Usuarios</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 50%;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-    </head>
-    <body>
-    
-       
-    
+    <title>Search Profiles</title>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Logo -->
+            <img src="logo.png" alt="Logo" width="100%">
+            <!-- Welcome message -->
+            <h4>Welcome</h4>
+            <p>Consulta la información</p>
+        </div>
+        <div class="main-content">
+            <!-- Main title -->
+            <h1>Search Profiles</h1>
+            <!-- Search input -->
+            <form id="searchForm">
+                <input type="text" id="searchInput" class="search-input" placeholder="Introduce un nombre para buscar perfiles">
+                <button onclick="searchStudents()">Buscar</button>
+            </form>
+            <!-- Results table -->
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Alergias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se insertarán los resultados de búsqueda -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="search.js"></script>
+</body>
 </html>
