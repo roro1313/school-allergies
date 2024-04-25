@@ -1,30 +1,30 @@
-const username = 'admin';
-const password = 'pass';
+    async function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-const url = 'https://school-allergies.onrender.com/login';
+    try {
+        const response = await fetch("https://school-allergies.onrender.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-const data = {
-  username: username,
-  password: password
-};
+        const data = await response.json();
 
-const options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-};
-
-fetch(urlLogin, options)
-  .then(response => {
-    if (!response.error===false)  {
-      console.log('Inicio de sesión exitoso');
-      // Realizar acciones adicionales después de iniciar sesión correctamente
-    } else {
-      console.error('Error en la solicitud de inicio de sesión');
+        if (!response.error) {
+            localStorage.setItem("token", data.token);
+            document.getElementById("errorMessage").innerText = data.message;
+            setTimeout(() => {
+                // Redirect to search.html page when the user is logged
+                window.location.href = "../search/search.html";
+            }, 1000);
+        } else {
+            document.getElementById("errorMessage").innerText = data.message;
+        }
+    } catch (error) {
+        console.error(error);
+        document.getElementById("errorMessage").innerText = "An error occurred. Please try again later.";
     }
-  })
-  .catch(error => {
-    console.error('Error en la solicitud:', error);
-  });
+}
