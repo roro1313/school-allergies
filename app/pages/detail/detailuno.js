@@ -49,7 +49,7 @@ async function studentDetail() {
           <table>
             <thead>
               <tr>
-                <th>Crisis</th>
+                <th>TipodeCrisis</th>
                 <th>Fecha</th>
                 <th>Información</th>
               </tr>
