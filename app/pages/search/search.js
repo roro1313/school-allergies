@@ -49,4 +49,3 @@ function displayStudents(students) {
 function redirectToDetail(userId) {
   window.location.href = `../detail/detail.html?userId=${userId}`;
 }
-s
