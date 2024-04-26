@@ -1,5 +1,5 @@
 async function searchStudents() {
-  const searchValue = document.getElementById("nombre").value;
+  const searchValue = document.getElementById("searchInput").value;
   const token = localStorage.getItem("token");
 
   try {
