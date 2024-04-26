@@ -30,7 +30,7 @@ async function searchStudents() {
 
 function displayStudents(students) {
   const tableBody = document.getElementById("tableBody");
-  tableBody.innerHTML = "search.html"; // Clean table before print new results
+  tableBody.innerHTML = ""; // Clean table before print new results
   // Pick student info and print them in a table row
   // Pick all allergies and join them in a cell
   students.map((student) => {
@@ -49,28 +49,3 @@ function displayStudents(students) {
 function redirectToDetail(userId) {
   window.location.href = `../detail/detail.html?userId=${userId}`;
 }
-
-
-document.getElementById('register-form').addEventListener('submit', function(event) {
-    var usernameInput = document.getElementById('username');
-    var passwordInput = document.getElementById('password');
-    var usernameError = document.getElementById('username-error');
-    var passwordError = document.getElementById('password-error');
-    var isValid = true;
-
-    // Validar el nombre de usuario
-    if (usernameInput.value.trim() === '') {
-        usernameError.textContent = 'Por favor ingrese un nombre de usuario';
-        isValid = false;
-    } else {
-        usernameError.textContent = '';
-    }
-
-    // Validar la contraseña
-    if (passwordInput.value.trim() === '') {
-        passwordError.textContent = 'Por favor ingrese una contraseña';
-        isValid = false;
-    } else {
-        passwordError.textContent = '';
-    }
-});
