@@ -25,18 +25,33 @@
    
   <nav>
     <div class="card-medio">
-    
-    
-      <div class="card bg-light mb-3" style="max-width: 250em;">
+    <div class="card bg-light mb-3" style="max-width: 250em;">
       
       <span style="font-size: xx-large;">Busca el nombre del alumno del cual quieres saber 
         sus episodios de alergia para evitar reacciones</span>
           
           <p class="lead">Introduce el nombre del alumno</p>
-          <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre del alumno" required>
-          <button type="submit">Enviar</button>
-         </div>
-      </nav>
+          <form id="searchForm">
+            <input type="text" id="searchInput" class="search-input" placeholder="Escribe aquí">
+            <button type="button" onclick="searchStudents()">Enviar</button>
+        </form>
+        <div id="errorMessage"></div>
+        <!-- Results table -->
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Alergias</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Search results will be printed here from JavaScript -->
+            </tbody>
+        </table>
+    </div>
+   </div>
+  </nav>
     
    
 
