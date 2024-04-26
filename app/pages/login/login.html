@@ -2,34 +2,16 @@
 <html lang="en">
   <head>
     <title>PROYECTO</title>
-  
-  
-     
-
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
-    
-    
-  </head>
-      <style>
-    body {
-        font-family: cursive, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-         }
+     
+  
 
-</style>
- 
 
- 
- </head> 
 
+</head>
 
 
 
@@ -64,36 +46,18 @@
            
             <!-- Boton. --> 
             
-            <div class="container">
-                <h2>Iniciar Sesión</h2>
-                <form action="#" method="post">
-                    <input type="text" name="usuario" placeholder="Usuario" required><br>
-                    <input type="password" name="contraseña" placeholder="Contraseña" required><br>
-                    <input type="submit" value="Iniciar Sesión">
-                </form>
-            </div>
+     <div class="container">
+        <h1>Iniciar Sesión</h1>
+        <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="button" onclick="login()">Login</button>
+    </form>
+    <div id="errorMessage"></div>
+    <script src="login.js"></script>
 
-  
-          
-           
-          
-        
-
-               <nav>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Acerca de</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
-          
-         <footer>
-          <div class="container">
-             <p>&copy; Rocío y Sofía 2024</p>
-              </div>
-          </footer>
-      
-          <script src="login.js"></script>
+              
   </body>
 </html>
