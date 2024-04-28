@@ -1,3 +1,7 @@
+// SEARCH PAGE: When a user is logged and search in database
+// Admin can do: all searches, user creation, user edition and user deletion
+// User can do: all searches
+
 async function searchStudents() {
   const searchValue = document.getElementById("searchInput").value;
   const token = localStorage.getItem("token");

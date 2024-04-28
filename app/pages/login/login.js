@@ -15,6 +15,7 @@ async function login() {
 
         if (!response.error) {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("usertype", data.usertype);
             document.getElementById("errorMessage").innerText = data.message;
             setTimeout(() => {
                 // Redirect to search.html page when the user is logged
