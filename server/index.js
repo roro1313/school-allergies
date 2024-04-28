@@ -17,7 +17,7 @@ function authenticateToken(usertypes) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) return res.status(403).json({ error: true, message: "🟥 Forbidden" });
       const usertype = decoded.usertype;
-      if (!userTypes.includes(usertype)) {
+      if (!usertypes.includes(usertype)) {
         // Usertype not allowed and return error message
         return res.status(403).json({ error: true, message: "🟥 Forbidden" });
       }
