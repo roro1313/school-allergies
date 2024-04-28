@@ -51,12 +51,13 @@
         <td>DATO 3</td>
       </table>
     </div>
-    <button id="open-modal-button" onclick="openModal()">
-      AÑADIR ALERGIAS
-    </button>
-    <div id="modal-detail" class="modal">
+    <!-- Este botón no hace falta, se accede al modal desde el botón + -->
+    <!-- <button id="open-modal-button" onclick="openCreateAllergyModal()">AÑADIR ALERGIAS</button> -->
+
+    <!-- Aquí va un modal para la creación de alergia -->
+    <div id="modal-detail-create-allergy" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close" onclick="closeModalAllergies()">&times;</span>
         <h2>Añadir Alergia</h2>
         <form id="myForm">
           <label for="alergia">Alergia:</label>
@@ -80,17 +81,17 @@
             name="descripcion"
             placeholder="Introduce una descripción"
           ></textarea>
-          <button type="submit">Guardar</button>
+          <button type="submit">Crear alergia</button>
         </form>
       </div>
     </div>
+    <!-- Este botón no hace falta, se accede al modal desde el botón + -->
+    <!-- <button id="open-modal-button" onclick="openModal()">AÑADIR NUEVAS CRISIS</button> -->
 
-    <button id="open-modal-button" onclick="openModal()">
-      AÑADIR NUEVAS CRISIS
-    </button>
-    <div id="modal-contentuno" class="modal">
-      <div class="modal-contentuno">
-        <span class="close" onclick="closeModal()">&times;</span>
+    <!-- Aquí va un modal para la creación de crisis -->
+    <div id="modal-detail-create-crisis">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalCrisis()">&times;</span>
         <h2>Añadir Episodios</h2>
         <form id="myForm">
           <label for="alergia">Alergia:</label>
@@ -107,17 +108,23 @@
             id="fecha"
             name="fecha"
             placeholder="Introduce el tipo"
-          />
+          /> <!-- Mírate como hacer un input de tipo fecha :) -->
           <label for="descripcion">Información adicional:</label>
           <textarea
             id="descripcion"
             name="descripcion"
             placeholder="Más info"
           ></textarea>
-          <button type="submit">Guardar</button>
+          <button type="submit">Crear crisis</button>
         </form>
       </div>
     </div>
+    <!-- + Button with menu -->
+    <button class="plus-menu" onclick="toggleMenu()">+</button>
+    <ul class="speed-dial" id="speedDial">
+        <li class="speed-dial-item" onclick="openCreateAllergyModal()">Crear alergia a este alumno</li>
+        <li class="speed-dial-item" onclick="openCreateCrisisModal()">Crear crisis a este alumno</li>
+    </ul>
     <script src="detail.js"></script>
   </body>
 </html>
