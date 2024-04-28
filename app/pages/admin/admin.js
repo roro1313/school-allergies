@@ -10,21 +10,21 @@ function toggleMenu() {
     }
   });
 
-let modalCreate = document.getElementById("modal-detail-create-user");
+let modalCreateStudent = document.getElementById("modal-detail-create-student");
 
 function openCreateUserModal() {
-  modalCreate.style.display = "block";
+  modalCreateStudent.style.display = "block";
   console.log("modal abierto");
 }
 
 function closeModal() {
-  modalCreate.style.display = "none";
+  modalCreateStudent.style.display = "none";
 }
 
 window.onclick = function (event) {
-  if (event.target == modalCreate) {
+  if (event.target == modalCreateStudent) {
     modal.style.display = "none";
   }
 };
 
-// Aquí tienes que meter el fetch para crear usuarios que me has pasado en la captura de pantalla
+// Aquí tienes que meter el fetch para crear estudiantes que me has pasado en la captura de pantalla
