@@ -8,27 +8,22 @@ const jwt = require('jsonwebtoken');
 
 //app.use(express.static("public"));
 
-// Middleware for CORS enabling
-function enableCors(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Permite todas las solicitudes de cualquier origen
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Métodos permitidos
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Encabezados permitidos
-}
-
 // JWT authentication middleware
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+function authenticateToken(usertypes) {
+  return function(req, res, next) {
+    const token = req.headers.authorization;
+    if (!token) return res.status(401).json({ error: true, message: "🟥 Unauthorized" });
 
-  if (!token) return res.status(401).send({ error: true, message: 'Unauthorized' });
-
-  try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = user;
-    next();
-  } catch (err) {
-    return res.status(403).send({ error: true, message: 'Forbidden' });
-  }
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) return res.status(403).json({ error: true, message: "🟥 Forbidden" });
+      const usertype = decoded.usertype;
+      if (!userTypes.includes(usertype)) {
+        // Usertype not allowed and return error message
+        return res.status(403).json({ error: true, message: "🟥 Forbidden" });
+      }
+      next();
+    });
+  };
 }
 
 // Middleware bodyparser
@@ -65,12 +60,14 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ error: true, message: "🟥 Username and password are required" });
     }
 
-    const userData = await db.collection("user-data-login").findOne({ username, password });
-    if (!userData) {
+    const userdata = await db.collection("user-data-login").findOne({ username, password });
+    if (!userdata) {
       return res.status(401).json({ error: true, message: "🟥 Invalid username or password" });
     }
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const usertype = userdata.usertype;
+    const token = jwt.sign({ username, usertype }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
     res.status(200).json({ error: false, message: "Login successful", token });
   } catch (error) {
     console.error(error);
@@ -78,7 +75,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/students", authenticateToken, async (req, res) => {
+
+app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   if (!db) {
     return res.send({ error: true, response: "🟥 Database not connected" });
   }
@@ -93,7 +91,7 @@ app.get("/students", authenticateToken, async (req, res) => {
   }
 });
 
-app.post("/students", authenticateToken, async (req, res) => {
+app.post("/students", authenticateToken(["admin"]), async (req, res) => {
   try {
     const searchQuery = { userId: { $regex: req.body.userId, $options: 'i' } }; 
     const students = await db.collection("students").find(searchQuery).toArray();
@@ -109,7 +107,7 @@ app.post("/students", authenticateToken, async (req, res) => {
 });
 
 
-app.post("/students/new-student", authenticateToken, async (req, res) => {
+app.post("/students/new-student", authenticateToken(["admin"]), async (req, res) => {
   try {
     const newStudent = await db.collection("students").insertOne({
       studentName: req.body.studentName,
@@ -135,7 +133,7 @@ app.post("/students/new-student", authenticateToken, async (req, res) => {
   }
 });
 
-app.post("/students/new-allergy", authenticateToken, async (req, res) => {
+app.post("/students/new-allergy", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const newAllergy = await db.collection("students").updateOne(
       { userId: req.body.userId },
@@ -167,7 +165,7 @@ app.post("/students/new-allergy", authenticateToken, async (req, res) => {
   }
 });
 
-app.post("/students/new-crisis", authenticateToken, async (req, res) => {
+app.post("/students/new-crisis", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const newCrisis = await db.collection("students").updateOne(
       { userId: req.body.userId, "allergies.allergy": req.body.allergy },
