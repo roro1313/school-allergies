@@ -125,34 +125,4 @@ th {
   padding: 30px;
 }
 
-#register-form {
-  position: absolute; /* Posicionamiento absoluto */
-  top: 50%; /* Colocar en el centro vertical */
-  right: 300px; /* Colocar en el lado derecho */
-  transform: translateY(-50%); /* Centrar verticalmente */
-  background-color: #9fd5ff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px; /* Ancho del formulario */
 
-}
-input[type="text"],
-input[type="password"] {
-  width: calc(100% - 20px); /* Tamaño mediano para los cuadros de texto */
-  margin-bottom: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-
-button:hover {
-  background-color: #b34200;
-}
-.error-message {
-  color: red;
-  font-size: 0.8em;
-  margin-top: 5px;
-}
