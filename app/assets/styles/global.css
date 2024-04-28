@@ -1,0 +1,41 @@
+/* GLOBAL APPLICATION STYLES */
+/* 
+    Here we have the styles that all elements will share: text, buttons, etc.
+    All the buttons in the app have to be with the same color, font, effects and padding.
+*/
+
+* {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 44px;
+}
+
+h2 {
+    font-size: 32px;
+    line-height: 36px;
+}
+
+h3 {
+    font-size: 28px;
+    line-height: 32px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+button {
+    padding: 10px 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: lightslategray;
+}
+
+button:hover {
+    background-color: lightblue;
+    color: lightslategray;
+}

@@ -10,7 +10,7 @@
   left: 200px;
   width: 100%;
   height: 100%;
-  background-image: url('fondito.jpg'); /* Ruta de tu imagen de fondo */
+  background-image: url('../../assets/img/fondito.jpg'); /* Ruta de tu imagen de fondo */
   background-size: cover;
   background-position: center;
   z-index: -1; 

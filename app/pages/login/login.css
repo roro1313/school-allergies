@@ -1,37 +1,32 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-     height: 400px;
-     background-image: url("fotofondo.jpg");
-    background-size: cover;
-     background-repeat:no-repeat;
-     background-position: center center;.
-     style=”background-color:#33475b;
-     margin: 0;
-    padding: 0;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     min-height: 100vh;
-         }
- 
- 
-   h4{font-size: 2em;}
-   p{font-size: 1.25;}
+  font-family: "Roboto", sans-serif;
+  height: 400px;
+  background-image: url("../../assets/img/fotofondo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #33475b;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
+h4 {
+  font-size: 2em;
+}
+p {
+  font-size: 1.25;
+}
 
-<style>
-   body {
-       font-family: Arial, sans-serif;
-       margin: 0;
-       padding: 0;
-   }
-
-  
-  
-
-
-
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}

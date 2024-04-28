@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="search.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="search.css" />
+    <link rel="stylesheet" href="../../assets/styles/global.css" />
 
-<title>Bienvenidos</title>
+    <title>Bienvenidos</title>
+  </head>
+  <body class="background-image">
+    <div class="card-lateral">
+      <h1>Bienvenidos</h1>
+      <p>
+        Desde aquí puedes consultar toda la información sobre alergias del
+        alumno que desee.
+      </p>
+      <img src="../../assets/img/saludo.png" />
+    </div>
 
-
-
-</head>
-<body class="background-image">
-  
-  
-
-<div class="card-lateral">
-    <h1>Bienvenidos</h1>
-    <p>
-      Desde aquí puedes consultar toda la información sobre alergias del alumno que desee.</p>
-    <img src="saludo.png">
-     
-</div>
-
-   
-  <nav>
-    <div class="card-medio">
-    <div class="card bg-light mb-3" style="max-width: 250em;">
-      
-      <span style="font-size: xx-large;">Busca el nombre del alumno del cual quieres saber 
-        sus episodios de alergia para evitar reacciones</span>
-          
-          <p class="lead">Introduce el nombre del alumno</p>
+    <nav>
+      <div class="card-medio">
+        <div class="card bg-light mb-3">
+          <p>Busca el nombre del alumno del cual quieres saber sus episodios de
+            alergia para evitar reacciones</p>
+          <p>Introduce el nombre del alumno</p>
           <form id="searchForm">
-            <input type="text" id="searchInput" class="search-input" placeholder="Escribe aquí">
-            <button type="button" onclick="searchStudents()">Enviar</button>
-        </form>
-        <div id="errorMessage"></div>
-        <!-- Results table -->
-        <table id="resultsTable">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Escribe aquí"
+            />
+            <button type="button" onclick="searchStudents()">Buscar</button>
+          </form>
+          <div id="errorMessage"></div>
+          <!-- Results table -->
+          <table id="resultsTable">
             <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Alergias</th>
-                </tr>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Alergias</th>
+              </tr>
             </thead>
             <tbody id="tableBody">
-                <!-- Search results will be printed here from JavaScript -->
+              <!-- Search results will be printed here from JavaScript -->
             </tbody>
-        </table>
-    </div>
-   </div>
-  </nav>
+          </table>
+        </div>
+      </div>
+    </nav>
 
-  <form id="register-form">
-    <h2>Registro</h2>
-    <input type="text" id="username" placeholder="Nombre de usuario">
-    <div id="username-error" class="error-message"></div>
-    <input type="password" id="password" placeholder="Contraseña">
-    <div id="password-error" class="error-message"></div>
-    <button type="submit">Registrarse</button>
-</form>
-    
-   
+    <form id="register-form">
+      <h2>Registro</h2>
+      <input type="text" id="username" placeholder="Nombre de usuario" />
+      <div id="username-error" class="error-message"></div>
+      <input type="password" id="password" placeholder="Contraseña" />
+      <div id="password-error" class="error-message"></div>
+      <button type="submit">Registrarse</button>
+    </form>
 
-      <script src="search.js"></script>
-    <body>
-    
-       
-    
+    <script src="search.js"></script>
+  </body>
 </html>
