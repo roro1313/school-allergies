@@ -24,7 +24,7 @@
             <button class="plus-menu" onclick="toggleMenu()">+</button>
             <ul class="speed-dial" id="speedDial">
                 <li class="speed-dial-item" onclick="openCreateUserModal()">Crear usuario</li>
-                <li class="speed-dial-item" onclick="openCreateUserModal()">Crear estudiante</li>
+                <li class="speed-dial-item" onclick="openCreateStudentModal()">Crear estudiante</li>
                 <li class="speed-dial-item" onclick="openEditUserModal()">Editar usuario</li><!-- NO HACER NADA CON ESTO -->
                 <li class="speed-dial-item" onclick="openDeleteUserModal()">Borrar usuario</li><!-- NO HACER NADA CON ESTO -->
             </ul>
@@ -53,9 +53,9 @@
 
      <!---Crear estudiante modal--> 
 
-     <div id="modal-detail-create-student" class="modal">
+     <div id="modal-detail-create-student" class="modaluno">
         <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
+          <span class="close" onclick="closeModalUno()">&times;</span>
           <h2>Añade nuevo estudiantes</h2>
           <input type="text" id="username" placeholder="Nombre de usuario" />
                   <div id="username-error" class="error-message"></div>
