@@ -91,7 +91,7 @@ app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   }
 });
 
-app.post("/students", authenticateToken(["admin"]), async (req, res) => {
+app.post("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const searchQuery = { userId: { $regex: req.body.userId, $options: 'i' } }; 
     const students = await db.collection("students").find(searchQuery).toArray();
@@ -147,11 +147,9 @@ app.post("/students/new-allergy", authenticateToken(["admin", "user"]), async (r
         },
       }
     );
-
     if (newAllergy.modifiedCount === 0) {
       throw new Error("Allergy can not be created, userId not found " + req.body.userId);
     }
-
     res.json({
       error: false,
       message: "Allergy successfully created",
@@ -166,6 +164,7 @@ app.post("/students/new-allergy", authenticateToken(["admin", "user"]), async (r
 });
 
 app.post("/students/new-crisis", authenticateToken(["admin", "user"]), async (req, res) => {
+
   try {
     const newCrisis = await db.collection("students").updateOne(
       { userId: req.body.userId, "allergies.allergy": req.body.allergy },
