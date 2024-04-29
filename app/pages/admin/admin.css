@@ -1,61 +1,65 @@
-.background-image {
-  position: fixed;
-  top: 0;
-  left: 200px;
-  width: 100%;
+.container {
+  display: flex;
   height: 100%;
-  background-image: url("../../assets/img/fondodetail.jpg"); /* Ruta de tu imagen de fondo */
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
 }
 
-.card-lateral {
-  background-color: #ebb268;
-  width: 200px;
-  height: 500px;
+.sidebar {
+  width: 25%;
+  background-color: #f2f2f2;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 20px;
-  float: left;
-}
-.card-lateral img {
-  width: 100px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-  border-radius: 50%;
+  box-sizing: border-box;
 }
 
-.diseño {
-  /* AQUÍ FALTAN COSAS :) */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: calc(100% - 100px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  box-sizing: border-box;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid black; /* Borde de la tabla */
-  font-size: 24px; /* Tamaño de fuente de la tabla */
-  width: 80%; /* Anchura de la tabla */
-  max-width: 700px; /* Anchura máxima de la tabla */
-  padding: 20px;
-}
-td {
-  border: 1px solid black; /* Borde de la celda */
-  padding: 10px;
+  margin-top: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #526c89;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: lightgrey;
   cursor: pointer;
 }
-button:hover {
-  background-color: #0056b3;
+
+th {
+  background-color: #f2f2f2;
 }
+
 .modal {
   display: none; /* Ocultar por defecto */
   position: relative;
@@ -112,8 +116,8 @@ button:hover {
   cursor: pointer;
 }
 
-/* MODAL CREAR ALERGIAS */
-#modal-detail-create-allergy {
+/* MODAL CREAR USUARIO */
+#modal-detail-create-user {
   display: none;
   position: fixed;
   z-index: 1;
@@ -127,29 +131,33 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-detail-create-allergy.modal-content {
+#modal-detail-create-user.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 80%
 }
 
-#modal-detail-create-allergy.close {
+#modal-detail-create-user.close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#modal-detail-create-allergy.close:hover,
-#modal-detail-create-allergy.close:focus {
+#modal-detail-create-user.close:hover,
+#modal-detail-create-user.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-/* MODAL CREAR CRISIS */
-#modal-detail-create-crisis {
+
+
+
+/* ESTILOS MODAL DE CREAR ESTUDIANTE */
+
+#modal-detail-create-student {
   display: none;
   position: fixed;
   z-index: 1;
@@ -163,23 +171,23 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-detail-create-crisis.modal-content {
+#modal-detail-create-student.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 80%
 }
 
-#modal-detail-create-crisis.close {
+#modal-detail-create-student.close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#modal-detail-create-crisis.close:hover,
-#modal-detail-create-crisis.close:focus {
+#modal-detail-create-student.close:hover,
+#modal-detail-create-student.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;

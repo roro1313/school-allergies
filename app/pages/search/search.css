@@ -1,43 +1,128 @@
-   .card-lateral {
-        background-color: #add8e6; /* Color azul pastel */
-        width: 200px;
-        height: 500px;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        margin: 20px;
-        float: left;
-    }
-    h2 {
-        text-align: center;
-    }
-    .card-medio {
-        max-width: 400px;
-        margin: 0 auto;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        background-color: #f9f9f9;
-    }
-    label {
-        display: block;
-        margin-bottom: 10px;
-    }
-    input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
+.body {
+    margin: 0;
+    padding: 0;
+  
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 200px;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/img/fondito.jpg'); /* Ruta de tu imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  z-index: -1; 
+}
+  
+
+.card-lateral {
+  background-color: #add8e6; /* Color azul pastel */
+  width: 200px;
+  height: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  float: left;
+  
+}
+
+.card-lateral img {
+ width: 150%; /* Ancho máximo de la imagen */
+ max-height: 400px; /* Máxima altura de la imagen */
+}
+
+h2 {
+  text-align: center;
+}
+.card-medio {
+   background-color: #f9f9f9;
+  position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.card-lateral {
+  background-color: #add8e6; /* Color azul pastel */
+  width: 200px;
+  height: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  float: left;
+}
+h2 {
+  text-align: center;
+}
+
+.table-container {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Borde de la tabla */
+  position: fixed; /* Fijar la tabla en la parte superior */
+  font-size: 18px; /* Tamaño de la fuente de la tabla */
+  display: flex; /* Utilizamos flexbox para centrar vertical y horizontalmente */
+  justify-content: center; /* Centramos horizontalmente */
+  height: 100vh; /* Altura del contenedor, 100% del viewport */
+}
+
+.card-medio {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+}
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #f2f2f2;
+  padding: 30px;
+}
+
+

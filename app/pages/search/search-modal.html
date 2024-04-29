@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle de usuario</title>
+    <!-- Enlazamos el CSS para que coja los estilos -->
+    <link rel="stylesheet" href="search.css" />
+  </head>
+  <body>
+    <!-- Botón para abrir el modal -->
+    <!-- Lleva la función openModal() que está definida en search-modal.js, ahí controlamos lo que queremos que haga el botón al hacer click -->
+    <button id="open-modal-button" onclick="openModal()">Abrir modal</button>
+    <!-- El div del modal, añadimos class modal para que el CSS controle la visibilidad -->
+    <div id="modal-detail" class="modal">
+      <div class="modal-content">
+        <!-- Esta es la X que cierra el modal -->
+        <!-- Lleva la función closeModal() que está definida en search-modal.js, ahí controlamos lo que queremos que haga la X al hacer click -->
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>
+          <!-- Aquí, puedes coger todo lo que tienes dentro de la etiqueta <form> del archivo search.html y meterlo -->
+          Texto de ejemplo, aquí hay que meter el formulario y el botón de
+          enviar del formulario
+        </p>
+      </div>
+    </div>
+    <!-- Aquí estamos enlazando el archivo JS para que el HTML coja la funcionalidad -->
+    <!-- Déjalo al final de la etiqueta body para que funcione bien -->
+    <script src="search-modal.js"></script>
+  </body>
+</html>

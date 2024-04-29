@@ -1,11 +1,9 @@
-document.getElementById("loginForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
+async function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:3003/login", {
+        const response = await fetch("https://school-allergies.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -15,18 +13,19 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
         const data = await response.json();
 
-        if (response.ok) {
-            // Guardar el token en el almacenamiento local o de sesión
+        if (!response.error) {
             localStorage.setItem("token", data.token);
-            // Redireccionar a otra página o mostrar un mensaje de éxito
-            console.log("Login successful!");
+            localStorage.setItem("usertype", data.usertype);
+            document.getElementById("errorMessage").innerText = data.message;
+            setTimeout(() => {
+                // Redirect to search.html page when the user is logged
+                window.location.href = "../search/search.html";
+            }, 1000);
         } else {
-            // Mostrar un mensaje de error si la autenticación falla
-            console.error(data.message);
+            document.getElementById("errorMessage").innerText = data.message;
         }
     } catch (error) {
         console.error(error);
-        // Mostrar un mensaje de error genérico si ocurre un error en la solicitud
-        alert("An error occurred. Please try again later.");
+        document.getElementById("errorMessage").innerText = "An error occurred. Please try again later.";
     }
-});
+}
