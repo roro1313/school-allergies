@@ -12,17 +12,13 @@ const jwt = require('jsonwebtoken');
 function authenticateToken(usertypes) {
   return function(req, res, next) {
     const token = req.headers.authorization;
+    const usertype = req.headers.usertype;
     if (!token) return res.status(401).json({ error: true, message: "🟥 Unauthorized" });
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) return res.status(403).json({ error: true, message: "🟥 Forbidden" });
-      const usertype = decoded.usertype;
-      if (!usertypes.includes(usertype)) {
-        // Usertype not allowed and return error message
-        return res.status(403).json({ error: true, message: "🟥 Forbidden" });
-      }
-      next();
-    });
+    if (!usertypes.includes(usertype)) {
+      return res.status(403).json({ error: true, message: "🟥 Forbidden" });
+    }
+    next();
   };
 }
 
@@ -85,7 +81,7 @@ app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
     const students = await db.collection("students").find().toArray();
     students.length === 0
       ? res.send({ error: true, response: "No results" })
-      : res.send({ error: false, response: students });
+      : res.send({ error: false, response: students, Usertype: req.headers.usertype });
   } catch (error) {
     res.send({ error: true, response: error });
   }
@@ -99,7 +95,7 @@ app.post("/students", authenticateToken(["admin", "user"]), async (req, res) => 
     if (students.length === 0) {
       res.send({ error: true, response: "No results" });
     } else {
-      res.send({ error: false, response: students });
+      res.send({ error: false, response: students, Usertype: req.headers.usertype });
     }
   } catch (error) {
     res.send({ error: true, response: error });
