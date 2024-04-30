@@ -116,8 +116,9 @@ th {
   cursor: pointer;
 }
 
-/* MODAL CREAR USUARIO */
-#modal-detail-create-user {
+/* ESTILOS MODAL DE CREAR USUARIO */
+
+#modal-detail-create-student {
   display: none;
   position: fixed;
   z-index: 1;
@@ -131,7 +132,7 @@ th {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-detail-create-user.modal-content {
+#modal-detail-create-student.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
@@ -139,15 +140,15 @@ th {
   width: 80%
 }
 
-#modal-detail-create-user.close {
+#modal-detail-create-student.close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#modal-detail-create-user.close:hover,
-#modal-detail-create-user.close:focus {
+#modal-detail-create-student.close:hover,
+#modal-detail-create-student.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;

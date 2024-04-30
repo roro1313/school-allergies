@@ -33,18 +33,18 @@
     <!-- Crear usuario modal -->
     <div id="modal-detail-create-user" class="modal">
         <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
+          <span class="close" onclick="closeModalUser()">&times;</span>
           <form>
-            <!-- El formulario de registro de estudiantes va aquí -->
             <!-- En admin.js tienes la lógica para abrir y cerrar el modal ya hecha -->
-            <p>
-                <form id="register-form">
-                <h2>Registro</h2>
+            <p> <!-- DEJA DE USAR <p> PARA ENVOLVER UN FORM, POR FAVOR, BÓRRALO 
+              (Yo lo borré el otro día y lo has vuelto a poner) -->
+                <form id="create-user">
+                <h2>Registro</h2><!-- El formulario de abajo por qué no tiene título y este sí? -->
                 <input type="text" id="username" placeholder="Nombre de usuario" />
                 <div id="username-error" class="error-message"></div>
                 <input type="password" id="password" placeholder="Contraseña" />
                 <div id="password-error" class="error-message"></div>
-                <button type="submit">Registrarse</button>
+                <button type="submit">Registrarse</button><!-- ¿Dónde llamas a la funnción que hace el registro? -->
               </form>
             </p>
 
@@ -52,24 +52,20 @@
       </div>
 
      <!---Crear estudiante modal--> 
-
-     <div id="modal-detail-create-student" class="modaluno">
+<!-- Para crear estudiantes, necesitas los siguientes campos: studentName,studentSurname,studentBirth,studentGrade -->
+<h2>Añade nuevo estudiante</h2>
+     <div id="modal-detail-create-student" class="modal">
         <div class="modal-content">
-          <span class="close" onclick="closeModalUno()">&times;</span>
-          <h2>Añade nuevo estudiantes</h2>
+          <span class="close" onclick="closeModalStudent()">&times;</span>
           <input type="text" id="username" placeholder="Nombre de usuario" />
                   <div id="username-error" class="error-message"></div>
                   <input type="password" id="password" placeholder="Contraseña" />
                   <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
                    <div id="password-error" class="error-message"></div>
-                  <button type="submit">Registrarse</button>
-                </form>
+                  <button type="submit">Registrarse</button><!-- ¿Dónde llamas a la funnción que hace el registro? -->
+                </form><!-- ¿Dónde está la etiqueta <form> que va antes de esta? -->
         </div>
-      </div>
-
-  
-     
-     
+      </div>  
     <script src="admin.js"></script>
 </body>
 </html>

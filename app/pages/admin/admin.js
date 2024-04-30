@@ -10,36 +10,7 @@ function toggleMenu() {
     }
   });
 
-let modalCreateUser = document.getElementById("modal-detail-create-user");
-
-function openCreateUserModal() {
-  modalCreateUser.style.display = "block";
-  console.log("modal abierto");
-}
-
-function closeModal() {
-  modalCreateUser.style.display = "none";
-}
-
-window.onclick = function (event) {
-  if (event.target == modalCreateUser) {
-    modal.style.display = "none";
-  }
-};
-
 // MODAL CREAR ESTUDIANTE
-
-function toggleMenu() {
-  const speedDial = document.getElementById("speedDial");
-  speedDial.classList.toggle("active");
-}
-// Manage clicks outside the plus menu
-window.addEventListener("click", function (event) {
-  const speedDial = document.getElementById("speedDial");
-  if (!event.target.matches(".plus-menu")) {
-    speedDial.classList.remove("active");
-  }
-});
 
 let modalCreateStudent = document.getElementById("modal-detail-create-student");
 
@@ -48,7 +19,7 @@ modalCreateStudent.style.display = "block";
 console.log("modal abierto");
 }
 
-function closeModal() {
+function closeModalStudent() {
 modalCreateStudent.style.display = "none";
 }
 
@@ -58,19 +29,35 @@ if (event.target == modalCreateStudent) {
 }
 };
 
+// MODAL CREAR USUARIO
 
+let modalCreateUser = document.getElementById("modal-detail-create-user");
 
+function openCreateUserModal() {
+modalCreateUser.style.display = "block";
+console.log("modal abierto");
+}
 
-// Aquí tienes que meter el fetch para crear estudiantes que me has pasado en la captura de pantalla
+function closeModalUser() {
+modalCreateUser.style.display = "none";
+}
 
-async function registerUser(username, password) {
-  const formData = { username, password };
+window.onclick = function (event) {
+if (event.target == modalCreateUser) {
+  modal.style.display = "none";
+}
+};
+
+async function registerStudent(username, password) {
+  const formData = { username, password }; // Faltan datos, no se va a crear así: studentName,studentSurname,studentBirth,studentGrade
 
   try {
-      const response = await fetch("https://school-allergies.onrender.com/students/new-student", {
+      const response = await fetch("https://school-allergies.onrender.com/students/new-student", { //Estás llamando a new-student, esta llamada no es la de crear usuarios
           method: "POST",
           headers: {
-              "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "Usertype": usertype
           },
           body: JSON.stringify(formData)
       });
@@ -79,16 +66,18 @@ async function registerUser(username, password) {
 
       if (response.ok) {
           console.log("Usuario registrado correctamente:", data);
-          // Redirige al usuario a la página de login.html
-          window.location.href = "../login.html";
+          window.location.href = "../login.html"; //esto no funciona y no es necesario, quitalo
       } else {
           console.log("Error al registrar el usuario:", data);
-          // Aquí puedes manejar errores de registro
       }
   } catch (error) {
       console.error("Error al registrar el usuario:", error);
-      // Aquí puedes manejar errores de red u otros errores inesperados
   }
+}
+
+function registerUser () {
+  /* Aquí sí que va el fetch para crear usuarios, pero antes de hacer esto tienes que arreglar el detail,
+  hacer que registerStudent funcione y hacer que funcione la creación de crisis y la creación de alergias */
 }
 
 function displayStudents(students) {
