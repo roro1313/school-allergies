@@ -1,5 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get('userId');
+const token = localStorage.getItem("token");
+const usertype = localStorage.getItem("usertype");
 
 document.addEventListener("DOMContentLoaded", function() {
     // When the page is loaded, call studentDetail() to get all student information
@@ -8,8 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Calling endpoint with userId from url param
 async function studentDetail() {
-    const token = localStorage.getItem("token");
-  
+ 
     try {
       const response = await fetch(
         "https://school-allergies.onrender.com/students",
@@ -18,6 +19,7 @@ async function studentDetail() {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "Usertype": usertype
           },
           body: JSON.stringify({ userId }),
         }
