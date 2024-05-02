@@ -27,11 +27,46 @@ function closeModalAllergies() {
   modalCreateAllergy.style.display = "none";
 }
 
-function createAllergy() {
+
+function createAllergy(userId, allergy, medication) {
   // Aquí haces un fetch a /students/new-allergy, method POST
   // Coges userId, allergy y medication y lo envías al servidor
   // Muestra un mensaje de si se ha añadido correctamente o ha habido un error
   // Recargas la página para que aparezca la info nueva
+  // Objeto con los datos a enviar
+  const data = {
+    userId: userId,
+    allergy: allergy,
+    medication: medication
+  };
+
+  // Opciones para la solicitud fetch
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+
+  // Realizar la solicitud fetch
+  fetch('/students/new-allergy', options)
+    .then(response => {
+      if (response.ok) {
+        // Si la respuesta es exitosa, mostrar mensaje de éxito
+        alert('Se ha añadido la alergia correctamente.');
+        // Recargar la página para mostrar la nueva información
+        location.reload();
+      } else {
+        // Si hay un error, mostrar mensaje de error
+        alert('Ha ocurrido un error al añadir la alergia.');
+      }
+    })
+    .catch(error => {
+      // Capturar errores de red u otros errores
+      console.error('Error al realizar la solicitud:', error);
+      alert('Ha ocurrido un error al añadir la alergia.');
+    });
 }
 
 // MODAL AÑADIR CRISIS: 
@@ -47,9 +82,43 @@ function closeModalCrisis() {
   modalCreateCrisis.style.display = "none";
 }
 
-function createCrisis() {
+function createCrisis(userId, type, timestamp, information) {
   // Aquí haces un fetch a /students/new-crisis, method POST
   // Coges el userId, type, timestamp (que es una fecha) e information y lo envías al servidor
   // Muestra un mensaje de si se ha añadido correctamente o ha habido un error
   // Recargas la página para que aparezca la info nueva
+  const data = {
+    userId: userId,
+    type: type,
+    timestamp: timestamp,
+    information: information
+  };
+
+  // Opciones para la solicitud fetch
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+
+  // Realizar la solicitud fetch
+  fetch('/students/new-crisis', options)
+    .then(response => {
+      if (response.ok) {
+        // Si la respuesta es exitosa, mostrar mensaje de éxito
+        alert('Se ha añadido la crisis correctamente.');
+        // Recargar la página para mostrar la nueva información
+        location.reload();
+      } else {
+        // Si hay un error, mostrar mensaje de error
+        alert('Ha ocurrido un error al añadir la crisis.');
+      }
+    })
+    .catch(error => {
+      // Capturar errores de red u otros errores
+      console.error('Error al realizar la solicitud:', error);
+      alert('Ha ocurrido un error al añadir la crisis.');
+    });
 }
