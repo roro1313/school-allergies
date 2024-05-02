@@ -21,17 +21,19 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Calling endpoint with userId from url param
+const token = localStorage.getItem("token");
+const usertype = localStorage.getItem("usertype");
 async function studentDetail() {
-    const token = localStorage.getItem("token");
-  
+    
     try {
       const response = await fetch(
         "https://school-allergies.onrender.com/students",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Usertype": usertype
           },
           body: JSON.stringify({ userId }),
         }
@@ -110,7 +112,10 @@ function closeModalAllergies() {
 }
 
 
+
 function createAllergy(userId, allergy, medication) {
+  const token = localStorage.getItem("token");
+const usertype = localStorage.getItem("usertype");
   // Aquí haces un fetch a /students/new-allergy, method POST
   // Coges userId, allergy y medication y lo envías al servidor
   // Muestra un mensaje de si se ha añadido correctamente o ha habido un error
@@ -124,12 +129,14 @@ function createAllergy(userId, allergy, medication) {
 
   // Opciones para la solicitud fetch
   const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
+    method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Usertype": usertype
+          },
+          body: JSON.stringify({ userId }),
+        };
 
   // Realizar la solicitud fetch
   fetch('/students/new-allergy', options)
