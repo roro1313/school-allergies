@@ -185,12 +185,14 @@ function createCrisis(userId, type, timestamp, information) {
 
   // Opciones para la solicitud fetch
   const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
+    method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Usertype": usertype
+          },
+          body: JSON.stringify({ userId }),
+        };
 
   // Realizar la solicitud fetch
   fetch('/students/new-crisis', options)
