@@ -1,4 +1,4 @@
-// MODAL AÑADIR CRISIS:
+// AÑADIR CRISIS:
 let modalCreateCrisis = document.getElementById("modal-detail-create-crisis");
 
 function openCreateCrisisModal() {
@@ -7,14 +7,12 @@ function openCreateCrisisModal() {
   const select = localStorage.getItem("select");
   const allergies = select.split(",");
   const selectAllergyElement = document.getElementById("allergy");
-  allergies.forEach(allergy => {
+  allergies.forEach((allergy) => {
     const option = document.createElement("option");
     option.text = allergy.trim();
     selectAllergyElement.add(option);
   });
 }
-
-
 function closeModalCrisis() {
   modalCreateCrisis.style.display = "none";
 }
@@ -28,6 +26,11 @@ function createCrisis() {
   const information = document.getElementById("information").value;
   const allergy = document.getElementById("allergy").value;
 
+  if (!type || !timestamp || !information || !allergy) {
+    document.getElementById("errorForm").innerHTML = `<div style="background:#d46363;padding:3px;"><p>Por favor, complete todos los campos.</p></div>`;
+    return;
+  }
+
   const options = {
     method: "POST",
     headers: {
@@ -38,22 +41,25 @@ function createCrisis() {
     body: JSON.stringify({ userId, type, timestamp, information, allergy }),
   };
 
-  // Realizar la solicitud fetch
   fetch("https://school-allergies.onrender.com/students/new-crisis", options)
     .then((response) => {
+      const userFeedback = document.getElementById("userFeedback");
       if (response.ok) {
-        // Si la respuesta es exitosa, mostrar mensaje de éxito
-        alert("Se ha añadido la crisis correctamente.");
+        userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Se ha añadido la crisis correctamente.</p></div>`;
         closeModalCrisis();
-        window.location.reload();
+        setTimeout(() => {
+          userFeedback.innerHTML = "";
+          window.location.reload();
+        }, 1500);
       } else {
-        // Si hay un error, mostrar mensaje de error
-        alert("Ha ocurrido un error al añadir la crisis.");
+        userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Ha habido un error añadiendo la crisis</p></div>`;
+        setTimeout(() => {
+          userFeedback.innerHTML = "";
+        }, 1500);
       }
     })
     .catch((error) => {
-      // Capturar errores de red u otros errores
       console.error("Error al realizar la solicitud:", error);
-      alert("Ha ocurrido un error al añadir la crisis.");
+      userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Intente añadir la crisis más tarde</p></div>`;
     });
 }

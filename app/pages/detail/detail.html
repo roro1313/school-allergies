@@ -38,20 +38,8 @@
             placeholder="Introduce la medicación"
             required
           />
-          <label for="fecha">Fecha de diagnóstico:</label>
-          <input
-            type="text"
-            id="fecha"
-            name="fecha"
-            placeholder="Introduce la fecha"
-          />
-          <label for="descripcion">Descripción:</label>
-          <textarea
-            id="descripcion"
-            name="descripcion"
-            placeholder="Introduce una descripción"
-          ></textarea>
           <button type="button" onclick="createAllergy()">Registrar alergia</button>
+          <div id="errorForm"></div>
         </form>
       </div>
     </div>
@@ -71,29 +59,35 @@
           />
           <label for="timestamp">Fecha de la crisis:</label>
           <input
-            type="text"
+            type="date"
             id="timestamp"
             name="timestamp"
             placeholder="Introduce la fecha de la crisis"
+            required
           />
           <label for="information">Información adicional:</label>
           <textarea
             id="information"
             name="information"
             placeholder="Introduce información adicional"
+            required
           ></textarea>
           <label for="allergy">Alergia:</label>
           <select id="allergy" name="allergy" required>
           </select>
           <button type="button" onclick="createCrisis()">Registrar crisis</button>
+          <div id="errorForm"></div>
         </form>
       </div>
     </div>
+    </div>
+    <!-- USER FEEDBACK -->
+    <div id="userFeedback"></div>
     <!-- + Button with menu -->
     <button class="plus-menu" onclick="toggleMenu()">+</button>
     <ul class="speed-dial" id="speedDial">
-        <li class="speed-dial-item" onclick="openCreateAllergyModal()">Crear alergia a este alumno</li>
-        <li class="speed-dial-item" onclick="openCreateCrisisModal()">Crear crisis a este alumno</li>
+      <li class="speed-dial-item" onclick="openCreateAllergyModal()">Crear alergia a este alumno</li>
+      <li class="speed-dial-item" onclick="openCreateCrisisModal()">Crear crisis a este alumno</li>
     </ul>
       <script src="detail.js"></script>
       <script src="detail-allergies.js"></script>

@@ -101,3 +101,33 @@ button:hover {
 .speed-dial-item:hover {
     background-color: #3b3b3b; 
 }
+
+/* MODAL WITH FORM: STYLES */
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0; 
+  }
+  
+  .modal-content form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+  }
+  
+  .modal-content form label {
+    grid-column: span 2; 
+  }
+  
+  .modal-content form textarea {
+    grid-column: span 2; 
+  }
+  
+  .modal-content form button {
+    justify-self: end; 
+    margin-top: 10px;
+  }

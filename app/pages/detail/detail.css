@@ -19,6 +19,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   float: left;
 }
+
 .card-lateral img {
   width: 100px;
   height: auto;
@@ -40,16 +41,14 @@
   margin: 10%;
 }
 
-table {
-  border-collapse: collapse;
-  border: 2px solid black; /* Borde de la tabla */
-  font-size: 24px; /* Tamaño de fuente de la tabla */
-  width: 80%; /* Anchura de la tabla */
-  max-width: 700px; /* Anchura máxima de la tabla */
-  padding: 20px;
+#tableContainer table {
+  width: max-content;
 }
-td {
-  border: 1px solid black; /* Borde de la celda */
+
+#tableContainer th,
+#tableContainer td {
+  border-right: none;
+  border-bottom: solid 1px black;
   padding: 10px;
 }
 
