@@ -1,7 +1,6 @@
 .background-image {
   position: fixed;
   top: 0;
-  left: 200px;
   width: 100%;
   height: 100%;
   background-image: url("../../assets/img/fondodetail.jpg"); /* Ruta de tu imagen de fondo */
@@ -12,12 +11,12 @@
 
 .card-lateral {
   background-color: #ebb268;
-  width: 200px;
-  height: 500px;
+  width: 25%;
   padding: 20px;
+  margin-right: 20px;
+  height: 100%;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 20px;
   float: left;
 }
 .card-lateral img {
@@ -28,8 +27,17 @@
   border-radius: 50%;
 }
 
-.diseño {
-  /* AQUÍ FALTAN COSAS :) */
+.info-label {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.info-detail {
+  text-transform: capitalize;
+}
+
+#studentInfo {
+  margin: 10%;
 }
 
 table {

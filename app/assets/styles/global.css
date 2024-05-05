@@ -31,6 +31,10 @@ p {
     font-size: 14px;
     line-height: 18px;
 }
+td, th {
+    font-size: 16px;
+    line-height: 20px;
+}
 
 button {
     padding: 10px 25px;

@@ -11,38 +11,31 @@
     <div class="card-lateral">
       <h2>Perfil de Usuario</h2>
       <img src="../../assets/img/mujer.png" alt="Foto de usuario" />
-
-      <ul class="contact-info">
-        <li><strong>Fecha de nacimiento:</strong> XXX</li>
-        <li><strong>Clase / grupo:</strong> XXX</li>
-        <li><strong>Contactos de emergencia:</strong></li>
-        <li><strong>Teléfono 1:</strong> XXXX</li>
-        <li><strong>Teléfono 2:</strong> XXX</li>
-      </ul>
+      <div id="studentInfo">
+      </div>
     </div>
     <div class="main-content">
-      <!-- Table container -->
-      <h3>Información alergia:</h3>
-      <h3>Medicación</h3>
-
-      <div id="tableContainer">
-          <!-- Tables will be dynamically added here --> 
-    </div>
-    <!-- Este botón no hace falta, se accede al modal desde el botón + -->
-    <!-- <button id="open-modal-button" onclick="openCreateAllergyModal()">AÑADIR ALERGIAS</button> -->
-
-    <!-- Aquí va un modal para la creación de alergia -->
+    <div id="tableContainer"></div>
+    <!-- ALLERGY CREATION MODAL -->
     <div id="modal-detail-create-allergy" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalAllergies()">&times;</span>
         <h2>Añadir Alergia</h2>
-        <form id="myForm">
+        <form id="addAllergyForm">
           <label for="alergia">Alergia:</label>
           <input
             type="text"
             id="alergia"
             name="alergia"
             placeholder="Introduce la alergia"
+            required
+          />
+          <label for="medication">Medicación:</label>
+          <input
+            type="text"
+            id="medication"
+            name="medication"
+            placeholder="Introduce la medicación"
             required
           />
           <label for="fecha">Fecha de diagnóstico:</label>
@@ -58,40 +51,41 @@
             name="descripcion"
             placeholder="Introduce una descripción"
           ></textarea>
-          <button type="submit">Crear alergia</button>
+          <button type="button" onclick="createAllergy()">Registrar alergia</button>
         </form>
       </div>
     </div>
-    <!-- Aquí va un modal para la creación de crisis -->
-    <!-- Para hacer esto funcionar, tienes que arreglar el detail y mostrar correctamente las alergias y crisis 
-      de cada estudiante, como en detail.html de la rama backup -->
+    <!-- CRISIS CREATION MODAL -->
     <div id="modal-detail-create-crisis">
       <div class="modal-content">
         <span class="close" onclick="closeModalCrisis()">&times;</span>
-        <h2>Añadir Episodios</h2>
-        <form id="myForm">
-          <label for="alergia">Alergia:</label>
+        <h2>Añadir Crisis</h2>
+        <form id="addCrisisForm">
+          <label for="type">Tipo de crisis:</label>
           <input
             type="text"
-            id="alergia"
-            name="Crisis"
-            placeholder="Introduce la crisis"
+            id="type"
+            name="type"
+            placeholder="Introduce el tipo de crisis"
             required
           />
-          <label for="fecha">Tipo de crisis:</label>
+          <label for="timestamp">Fecha de la crisis:</label>
           <input
             type="text"
-            id="fecha"
-            name="fecha"
-            placeholder="Introduce el tipo"
-          /> <!-- Mírate como hacer un input de tipo fecha :) -->
-          <label for="descripcion">Información adicional:</label>
+            id="timestamp"
+            name="timestamp"
+            placeholder="Introduce la fecha de la crisis"
+          />
+          <label for="information">Información adicional:</label>
           <textarea
-            id="descripcion"
-            name="descripcion"
-            placeholder="Más info"
+            id="information"
+            name="information"
+            placeholder="Introduce información adicional"
           ></textarea>
-          <button type="submit">Crear crisis</button>
+          <label for="allergy">Alergia:</label>
+          <select id="allergy" name="allergy" required>
+          </select>
+          <button type="button" onclick="createCrisis()">Registrar crisis</button>
         </form>
       </div>
     </div>
@@ -101,6 +95,8 @@
         <li class="speed-dial-item" onclick="openCreateAllergyModal()">Crear alergia a este alumno</li>
         <li class="speed-dial-item" onclick="openCreateCrisisModal()">Crear crisis a este alumno</li>
     </ul>
-    <script src="detail.js"></script>
+      <script src="detail.js"></script>
+      <script src="detail-allergies.js"></script>
+      <script src="detail-crisis.js"></script>
   </body>
 </html>
