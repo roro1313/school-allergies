@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin panel</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin.css" />
     <link rel="stylesheet" href="../../assets/styles/global.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="sidebar">
-            <!-- Logo -->
-            <img src="https://placehold.co/100x100" alt="Logo">
-            <!-- Sidebar -->
-            <h4>Admin</h4>
+      <div class="sidebar">
+        <!-- Logo -->
+        <img src="https://placehold.co/100x100" alt="Logo" />
+        <!-- Sidebar -->
+        <h4>Admin</h4>
+      </div>
+      <div class="main-content">
+        <!-- Table container -->
+        <div id="tableContainer">
+          <!-- Tables will be dynamically added here -->
         </div>
-        <div class="main-content">
-            <!-- Table container -->
-            <div id="tableContainer">
-                <!-- Tables will be dynamically added here -->
-            </div>
-            <!-- + Button with menu -->
-            <button class="plus-menu" onclick="toggleMenu()">+</button>
-            <ul class="speed-dial" id="speedDial">
-                <li class="speed-dial-item" onclick="openCreateUserModal()">Crear usuario</li>
-                <li class="speed-dial-item" onclick="openCreateStudentModal()">Crear estudiante</li>
-                <li class="speed-dial-item" onclick="openEditUserModal()">Editar usuario</li><!-- NO HACER NADA CON ESTO -->
-                <li class="speed-dial-item" onclick="openDeleteUserModal()">Borrar usuario</li><!-- NO HACER NADA CON ESTO -->
-            </ul>
-        </div>
+        <!-- + Button with menu -->
+        <button class="plus-menu" onclick="toggleMenu()">+</button>
+        <ul class="speed-dial" id="speedDial">
+          <li class="speed-dial-item" onclick="openCreateUserModal()">
+            Crear usuario
+          </li>
+          <li class="speed-dial-item" onclick="openCreateStudentModal()">
+            Crear estudiante
+          </li>
+          <li class="speed-dial-item" onclick="openEditUserModal()">
+            Editar usuario
+          </li>
+          <!-- NO HACER NADA CON ESTO -->
+          <li class="speed-dial-item" onclick="openDeleteUserModal()">
+            Borrar usuario
+          </li>
+          <!-- NO HACER NADA CON ESTO -->
+        </ul>
+      </div>
     </div>
     <!-- Crear usuario modal -->
     <div id="modal-detail-create-user" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModalUser()">&times;</span>
-          <form>
-            <!-- En admin.js tienes la lógica para abrir y cerrar el modal ya hecha -->
-            <p> <!-- DEJA DE USAR <p> PARA ENVOLVER UN FORM, POR FAVOR, BÓRRALO 
-              (Yo lo borré el otro día y lo has vuelto a poner) -->
-                <form id="create-user">
-                <h2>Registro</h2><!-- El formulario de abajo por qué no tiene título y este sí? -->
-                <input type="text" id="username" placeholder="Nombre de usuario" />
-                <div id="username-error" class="error-message"></div>
-                <input type="password" id="password" placeholder="Contraseña" />
-                <div id="password-error" class="error-message"></div>
-                <button type="submit">Registrarse</button><!-- ¿Dónde llamas a la funnción que hace el registro? -->
-              </form>
-            </p>
-
-        </div>
-      </div>
-
-     <!---Crear estudiante modal--> 
-<!-- Para crear estudiantes, necesitas los siguientes campos: studentName,studentSurname,studentBirth,studentGrade -->
-<h2>Añade nuevo estudiante</h2>
-     <div id="modal-detail-create-student" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModalStudent()">&times;</span>
+      <div class="modal-content">
+        <span class="close" onclick="closeModalUser()">&times;</span>
+        <form id="create-user">
+          <h2>Registro</h2>
+          <!-- El formulario de abajo por qué no tiene título y este sí? -->
           <input type="text" id="username" placeholder="Nombre de usuario" />
-                  <div id="username-error" class="error-message"></div>
-                  <input type="password" id="password" placeholder="Contraseña" />
-                  <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
-                   <div id="password-error" class="error-message"></div>
-                  <button type="submit">Registrarse</button><!-- ¿Dónde llamas a la funnción que hace el registro? -->
-                </form><!-- ¿Dónde está la etiqueta <form> que va antes de esta? -->
-        </div>
-      </div>  
+          <div id="username-error" class="error-message"></div>
+          <input type="password" id="password" placeholder="Contraseña" />
+          <div id="password-error" class="error-message"></div>
+          <button type="button" onclick="registerUser()">
+            Añadir estudiante
+          </button>
+          <div id="userFeedback"></div>
+        </form>
+      </div>
+    </div>
+
+    <!---Crear estudiante modal-->
+    <h2>Añade nuevo estudiante</h2>
+    <div id="modal-detail-create-student" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalStudent()">&times;</span>
+        <form id="create-student">
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Nombre del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentSurname"
+            placeholder="Apellidos del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentGrade"
+            placeholder="Curso del estudiante"
+            required
+          />
+          <input
+            type="date"
+            id="studentBirth"
+            placeholder="Fecha de nacimiento"
+            required
+          />
+          <button type="button" onclick="registerStudent()">
+            Añadir estudiante
+          </button>
+          <div id="userFeedback"></div>
+        </form>
+      </div>
+    </div>
     <script src="admin.js"></script>
-</body>
+  </body>
 </html>

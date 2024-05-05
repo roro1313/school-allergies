@@ -48,36 +48,46 @@ if (event.target == modalCreateUser) {
 }
 };
 
-async function registerStudent(username, password) {
-  const formData = { username, password }; // Faltan datos, no se va a crear así: studentName,studentSurname,studentBirth,studentGrade
+async function registerStudent() {
+  const token = localStorage.getItem("token");
+  const usertype = localStorage.getItem("usertype");
+  const studentName = document.getElementById("studentName").value;
+  const studentSurname = document.getElementById("studentSurname").value;
+  const studentGrade = document.getElementById("studentGrade").value;
+  const studentBirth = document.getElementById("studentBirth").value;
 
   try {
-      const response = await fetch("https://school-allergies.onrender.com/students/new-student", { //Estás llamando a new-student, esta llamada no es la de crear usuarios
+      const response = await fetch("https://school-allergies.onrender.com/students/new-student", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
             "Usertype": usertype
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({studentName, studentSurname, studentGrade, studentBirth})
       });
 
       const data = await response.json();
-
+      const userFeedback = document.getElementById("userFeedback");
+      
       if (response.ok) {
-          console.log("Usuario registrado correctamente:", data);
-          window.location.href = "../login.html"; //esto no funciona y no es necesario, quitalo
+          console.log("Estudiante registrado correctamente:", data);
+          userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Estudiante registrado correctamente.</p></div>`;
+          setTimeout(() => {
+            userFeedback.innerHTML = "";
+            closeModalStudent();
+          }, 1500);
       } else {
-          console.log("Error al registrar el usuario:", data);
+          console.log("Error al registrar el estudiante:", data);
+          userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al registrar estudiante.</p></div>`;
       }
   } catch (error) {
-      console.error("Error al registrar el usuario:", error);
+      console.error("Error al registrar el estudiante:", error);
   }
 }
 
 function registerUser () {
-  /* Aquí sí que va el fetch para crear usuarios, pero antes de hacer esto tienes que arreglar el detail,
-  hacer que registerStudent funcione y hacer que funcione la creación de crisis y la creación de alergias */
+  /* Aquí sí que va el fetch para crear usuarios */
 }
 
 function displayStudents(students) {
@@ -97,8 +107,4 @@ students.map((student) => {
                 </tr>`;
   tableBody.innerHTML += row; // Add table row
 });
-}
-
-function redirectToDetail(userId) {
-window.location.href = `../detail/detail.html?userId=${userId}`;
 }
