@@ -18,8 +18,13 @@ async function login() {
             localStorage.setItem("usertype", data.usertype);
             document.getElementById("errorMessage").innerText = data.message;
             setTimeout(() => {
-                // Redirect to search.html page when the user is logged
-                window.location.href = "../search/search.html";
+                // Redirect to a different page if admin is logged
+                if (data.usertype === "admin"){
+                    window.location.href = "../admin/admin.html";
+                } else {
+                    window.location.href = "../search/search.html";
+                }
+                
             }, 1000);
         } else {
             document.getElementById("errorMessage").innerText = data.message;
