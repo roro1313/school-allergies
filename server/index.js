@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: true, message: "🟥 Internal server error" });
   }
 });
-
+// SEARCH
 app.post(
   "/students",
   authenticateToken(["admin", "user"]),
@@ -111,7 +111,7 @@ app.post(
     }
   }
 );
-
+// STUDENTS
 app.post(
   "/students/new-student",
   authenticateToken(["admin"]),
@@ -142,143 +142,6 @@ app.post(
   }
 );
 
-app.post(
-  "/users/new-user",
-  authenticateToken(["admin"]),
-  async (req, res) => {
-    try {
-      const newUser = await db.collection("user-data-login").insertOne({
-        username: req.body.studentName,
-        usertype: req.body.studentSurname,
-        password: req.body.studentBirth,
-      });
-
-      res.json({
-        error: false,
-        response: newUser,
-        message: "User successfully created",
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error: true,
-        response: error,
-        message: "User not created",
-      });
-    }
-  }
-);
-
-app.post(
-  "/students/new-allergy",
-  authenticateToken(["admin", "user"]),
-  async (req, res) => {
-    try {
-      const newAllergy = await db.collection("students").updateOne(
-        { userId: req.body.userId },
-        {
-          $push: {
-            allergies: {
-              allergy: req.body.allergy,
-              medication: req.body.medication,
-              crisis: [],
-            },
-          },
-        }
-      );
-      if (newAllergy.modifiedCount === 0) {
-        throw new Error(
-          "Allergy can not be created, userId not found " + req.body.userId
-        );
-      }
-      res.json({
-        error: false,
-        message: "Allergy successfully created",
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error: true,
-        message: "Error al crear la alergia",
-      });
-    }
-  }
-);
-
-app.post(
-  "/students/new-crisis",
-  authenticateToken(["admin", "user"]),
-  async (req, res) => {
-    try {
-      const newCrisis = await db.collection("students").updateOne(
-        { userId: req.body.userId, "allergies.allergy": req.body.allergy },
-        {
-          $push: {
-            "allergies.$.crisis": {
-              type: req.body.type,
-              timestamp: req.body.timestamp,
-              information: req.body.information,
-            },
-          },
-        }
-      );
-
-      if (newCrisis.modifiedCount === 0) {
-        throw new Error(
-          "Crisis can not be created, userId not found " + req.body.userId
-        );
-      }
-
-      res.json({
-        error: false,
-        message: "Crisis successfully created",
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error: true,
-        message: "Error creating crisis",
-      });
-    }
-  }
-);
-
-app.post(
-  "/students/edit-student",
-  authenticateToken(["admin"]),
-  async (req, res) => {
-    try {
-      const updatedStudent = await db
-        .collection("students")
-        .updateOne(
-          { userId: userId },
-          {
-            $set: {
-              studentName: req.body.studentName,
-              studentSurname: req.body.studentSurname,
-              studentBirth: req.body.studentBirth,
-              studentGrade: req.body.studentGrade,
-            },
-          }
-        );
-
-      if (updatedStudent.modifiedCount === 0) {
-        throw new Error("Student with " + req.body.userId + " not found");
-      }
-
-      res.json({
-        error: false,
-        message: "Student information updated successfully",
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error: true,
-        message: "Error updating student information",
-      });
-    }
-  }
-);
 app.post(
   "/students/edit-student",
   authenticateToken(["admin"]),
@@ -340,6 +203,108 @@ app.delete(
       res.status(500).json({
         error: true,
         message: "Error deleting student",
+      });
+    }
+  }
+);
+// ALLERGIES
+app.post(
+  "/students/new-allergy",
+  authenticateToken(["admin", "user"]),
+  async (req, res) => {
+    try {
+      const newAllergy = await db.collection("students").updateOne(
+        { userId: req.body.userId },
+        {
+          $push: {
+            allergies: {
+              allergy: req.body.allergy,
+              medication: req.body.medication,
+              crisis: [],
+            },
+          },
+        }
+      );
+      if (newAllergy.modifiedCount === 0) {
+        throw new Error(
+          "Allergy can not be created, userId not found " + req.body.userId
+        );
+      }
+      res.json({
+        error: false,
+        message: "Allergy successfully created",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error al crear la alergia",
+      });
+    }
+  }
+);
+// CRISIS
+app.post(
+  "/students/new-crisis",
+  authenticateToken(["admin", "user"]),
+  async (req, res) => {
+    try {
+      const newCrisis = await db.collection("students").updateOne(
+        { userId: req.body.userId, "allergies.allergy": req.body.allergy },
+        {
+          $push: {
+            "allergies.$.crisis": {
+              type: req.body.type,
+              timestamp: req.body.timestamp,
+              information: req.body.information,
+            },
+          },
+        }
+      );
+
+      if (newCrisis.modifiedCount === 0) {
+        throw new Error(
+          "Crisis can not be created, userId not found " + req.body.userId
+        );
+      }
+
+      res.json({
+        error: false,
+        message: "Crisis successfully created",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error creating crisis",
+      });
+    }
+  }
+);
+
+// USERS
+app.post(
+  "/users/new-user",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const newUser = await db.collection("user-data-login").insertOne({
+        username: req.body.studentName,
+        usertype: req.body.studentSurname,
+        password: req.body.studentBirth,
+      });
+
+      res.json({
+        error: false,
+        response: newUser,
+        message: "User successfully created",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        response: error,
+        message: "User not created",
       });
     }
   }
