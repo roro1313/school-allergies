@@ -70,7 +70,7 @@ router.post(
         const updatedStudent = await db
           .collection("students")
           .updateOne(
-            { userId: userId },
+            { userId: req.body.userId },
             {
               $set: {
                 studentName: req.body.studentName,
@@ -104,14 +104,13 @@ router.post(
     authenticateToken(["admin"]),
     async (req, res) => {
       try {
-        const userId = req.body.userId;
-  
+ 
         const deletedStudent = await db
           .collection("students")
-          .deleteOne({ userId: userId });
+          .deleteOne({ userId: req.body.userId });
   
         if (deletedStudent.deletedCount === 0) {
-          throw new Error("Student with userId " + userId + " not found");
+          throw new Error("Student with userId " + req.body.userId + " not found");
         }
   
         res.json({
