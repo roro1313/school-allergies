@@ -129,6 +129,29 @@ app.post("/students/new-student", authenticateToken(["admin"]), async (req, res)
   }
 });
 
+app.post("/students/new-user", authenticateToken(["admin"]), async (req, res) => {
+  try {
+    const newUser = await db.collection("user-data-login").insertOne({
+      username: req.body.studentName,
+      usertype: req.body.studentSurname,
+      password: req.body.studentBirth,
+    });
+
+    res.json({
+      error: false,
+      response: newUser,
+      message: "User successfully created",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: true,
+      response: error,
+      message: "User not created",
+    });
+  }
+});
+
 app.post("/students/new-allergy", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const newAllergy = await db.collection("students").updateOne(
