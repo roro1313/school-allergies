@@ -12,3 +12,5 @@ function authenticateToken(usertypes) {
       next();
     };
   }
+
+  export default authenticateToken;
