@@ -402,6 +402,31 @@ app.put(
     }
   }
 );
+app.delete(
+  "/users/delete-user",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const deletedUser = await db.collection("user-data-login").deleteOne(
+        { username: req.body.username }
+      );
+      if (deletedUser.deletedCount === 0) {
+        throw new Error("User not found for username " + req.body.username);
+      }
+
+      res.json({
+        error: false,
+        message: "User deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error deleting user",
+      });
+    }
+  }
+);
 
 
 app.listen(process.env.PORT || 3000, (e) => {
