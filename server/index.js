@@ -351,9 +351,9 @@ app.post(
   async (req, res) => {
     try {
       const newUser = await db.collection("user-data-login").insertOne({
-        username: req.body.studentName,
-        usertype: req.body.studentSurname,
-        password: req.body.studentBirth,
+        username: req.body.username,
+        usertype: req.body.usertype,
+        password: req.body.password,
       });
 
       res.json({
@@ -367,6 +367,37 @@ app.post(
         error: true,
         response: error,
         message: "User not created",
+      });
+    }
+  }
+);
+app.put(
+  "/users/edit-user",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const updatedUser = await db.collection("user-data-login").updateOne(
+        { username: req.body.username },
+        {
+          $set: {
+            usertype: req.body.usertype,
+            password: req.body.password,
+          },
+        }
+      );
+      if (updatedUser.modifiedCount === 0) {
+        throw new Error("User not found for username " + req.body.username);
+      }
+
+      res.json({
+        error: false,
+        message: "User information updated successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error updating user information",
       });
     }
   }
