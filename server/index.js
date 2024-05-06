@@ -279,6 +279,72 @@ app.post(
     }
   }
 );
+app.post(
+  "/students/edit-student",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const updatedStudent = await db
+        .collection("students")
+        .updateOne(
+          { userId: userId },
+          {
+            $set: {
+              studentName: req.body.studentName,
+              studentSurname: req.body.studentSurname,
+              studentBirth: req.body.studentBirth,
+              studentGrade: req.body.studentGrade,
+            },
+          }
+        );
+
+      if (updatedStudent.modifiedCount === 0) {
+        throw new Error("Student with " + req.body.userId + " not found");
+      }
+
+      res.json({
+        error: false,
+        message: "Student information updated successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error updating student information",
+      });
+    }
+  }
+);
+
+app.delete(
+  "/students/delete-student",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const userId = req.body.userId;
+
+      const deletedStudent = await db
+        .collection("students")
+        .deleteOne({ userId: userId });
+
+      if (deletedStudent.deletedCount === 0) {
+        throw new Error("Student with userId " + userId + " not found");
+      }
+
+      res.json({
+        error: false,
+        message: "Student deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error deleting student",
+      });
+    }
+  }
+);
+
 
 app.listen(process.env.PORT || 3000, (e) => {
   e
