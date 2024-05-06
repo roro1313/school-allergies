@@ -40,13 +40,12 @@
         </ul>
       </div>
     </div>
-    <!-- Crear usuario modal -->
+    <!-- ADD USER MODAL -->
     <div id="modal-detail-create-user" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalUser()">&times;</span>
         <form id="create-user">
-          <h2>Registro</h2>
-          <!-- El formulario de abajo por qué no tiene título y este sí? -->
+          <h3>Registro de nuevo usuario</h3>
           <input type="text" id="username" placeholder="Nombre de usuario" />
           <div id="username-error" class="error-message"></div>
           <input type="password" id="password" placeholder="Contraseña" />
@@ -58,13 +57,13 @@
         </form>
       </div>
     </div>
-
-    <!---Crear estudiante modal-->
+    <!--- ADD STUDENT MODAL -->
     <h2>Añade nuevo estudiante</h2>
     <div id="modal-detail-create-student" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalStudent()">&times;</span>
         <form id="create-student">
+          <h3>Registro de nuevo estudiante</h3>
           <input
             type="text"
             id="studentName"
