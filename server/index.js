@@ -281,6 +281,37 @@ app.post(
     }
   }
 );
+app.delete(
+  "/students/delete-crisis",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const deletedCrisis = await db.collection("students").updateOne(
+        { userId: req.body.userId, "allergies.allergy": req.body.allergy },
+        {
+          $pull: {
+            "allergies.$.crisis": { type: req.body.type },
+          },
+        }
+      );
+      if (deletedCrisis.modifiedCount === 0) {
+        throw new Error("Crisis not found for userId " + req.body.userId + " and allergy " + req.body.allergy);
+      }
+
+      res.json({
+        error: false,
+        message: "Crisis deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        message: "Error deleting crisis",
+      });
+    }
+  }
+);
+
 
 // USERS
 app.post(
