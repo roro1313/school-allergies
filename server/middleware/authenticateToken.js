@@ -1,3 +1,5 @@
+const express = require("express");
+
 // JWT authentication middleware
 function authenticateToken(usertypes) {
     return function (req, res, next) {
@@ -13,4 +15,4 @@ function authenticateToken(usertypes) {
     };
   }
 
-  export default authenticateToken;
+module.exports = authenticateToken;
