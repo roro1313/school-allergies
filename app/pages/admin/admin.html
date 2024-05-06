@@ -16,10 +16,27 @@
         <h4>Admin</h4>
       </div>
       <div class="main-content">
-        <!-- Table container -->
-        <div id="tableContainer">
-          <!-- Tables will be dynamically added here -->
-        </div>
+        <form id="searchForm">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Escribe para buscar usuarios"
+          />
+          <button type="button" onclick="searchStudents()">🔍</button>
+        </form>
+          <!-- Results table -->
+          <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Alergias</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Search results will be printed here from JavaScript -->
+            </tbody>
         <!-- + Button with menu -->
         <button class="plus-menu" onclick="toggleMenu()">+</button>
         <ul class="speed-dial" id="speedDial">
@@ -58,7 +75,6 @@
       </div>
     </div>
     <!--- ADD STUDENT MODAL -->
-    <h2>Añade nuevo estudiante</h2>
     <div id="modal-detail-create-student" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalStudent()">&times;</span>
@@ -67,25 +83,21 @@
           <input
             type="text"
             id="studentName"
-            placeholder="Nombre del estudiante"
             required
           />
           <input
             type="text"
             id="studentSurname"
-            placeholder="Apellidos del estudiante"
             required
           />
           <input
             type="text"
             id="studentGrade"
-            placeholder="Curso del estudiante"
             required
           />
           <input
             type="date"
             id="studentBirth"
-            placeholder="Fecha de nacimiento"
             required
           />
           <button type="button" onclick="registerStudent()">
@@ -95,6 +107,45 @@
         </form>
       </div>
     </div>
+    <!-- EDIT STUDENT MODAL -->
+<div id="modal-detail-edit-student" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModalEditStudent()">&times;</span>
+    <form id="create-student">
+      <h3>Editar estudiante</h3>
+      <input
+        type="text"
+        id="studentNameEdit"
+        placeholder="Nombre del estudiante"
+        required
+      />
+      <input
+        type="text"
+        id="studentSurnameEdit"
+        placeholder="Apellidos del estudiante"
+        required
+      />
+      <input
+        type="text"
+        id="studentGradeEdit"
+        placeholder="Curso del estudiante"
+        required
+      />
+      <input
+        type="date"
+        id="studentBirthEdit"
+        placeholder="Fecha de nacimiento"
+        required
+      />
+      <button type="button" id="buttonEdit">
+        Editar estudiante
+      </button>
+      <div id="userFeedback"></div>
+    </form>
+  </div>
+</div>
     <script src="admin.js"></script>
+    <script src="admin-users.js"></script>
+    <script src="admin-students.js"></script>
   </body>
 </html>
