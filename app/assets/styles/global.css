@@ -1,0 +1,133 @@
+/* GLOBAL APPLICATION STYLES */
+/* 
+    Here we have the styles that all elements will share: text, buttons, etc.
+    All the buttons in the app have to be with the same color, font, effects and padding.
+*/
+
+body, html {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 44px;
+}
+
+h2 {
+    font-size: 32px;
+    line-height: 36px;
+}
+
+h3 {
+    font-size: 28px;
+    line-height: 32px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 18px;
+}
+td, th {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+button {
+    padding: 10px 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: lightslategray;
+}
+
+button:hover {
+    background-color: lightblue;
+    color: lightslategray;
+}
+
+.plus-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #47505a;
+    color: white;
+    font-size: 36px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+/* Menu + */
+
+.plus-menu:hover {
+    background-color: #7b7c7e;
+}
+
+.speed-dial {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.speed-dial.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.speed-dial-item {
+    background-color: #47505a;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.speed-dial-item:hover {
+    background-color: #3b3b3b; 
+}
+
+/* MODAL WITH FORM: STYLES */
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0; 
+  }
+  
+  .modal-content form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+  }
+  
+  .modal-content form label {
+    grid-column: span 2; 
+  }
+  
+  .modal-content form textarea {
+    grid-column: span 2; 
+  }
+  
+  .modal-content form button {
+    justify-self: end; 
+    margin-top: 10px;
+  }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="../../assets/styles/global.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <!-- Logo -->
+        <img src="https://placehold.co/100x100" alt="Logo" />
+        <!-- Sidebar -->
+        <h4>Admin</h4>
+      </div>
+      <div class="main-content">
+        <!-- Table container -->
+        <div id="tableContainer">
+          <!-- Tables will be dynamically added here -->
+        </div>
+        <!-- + Button with menu -->
+        <button class="plus-menu" onclick="toggleMenu()">+</button>
+        <ul class="speed-dial" id="speedDial">
+          <li class="speed-dial-item" onclick="openCreateUserModal()">
+            Crear usuario
+          </li>
+          <li class="speed-dial-item" onclick="openCreateStudentModal()">
+            Crear estudiante
+          </li>
+          <li class="speed-dial-item" onclick="openEditUserModal()">
+            Editar usuario
+          </li>
+          <!-- NO HACER NADA CON ESTO -->
+          <li class="speed-dial-item" onclick="openDeleteUserModal()">
+            Borrar usuario
+          </li>
+          <!-- NO HACER NADA CON ESTO -->
+        </ul>
+      </div>
+    </div>
+    <!-- ADD USER MODAL -->
+    <div id="modal-detail-create-user" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalUser()">&times;</span>
+        <form id="create-user">
+          <h3>Registro de nuevo usuario</h3>
+          <input type="text" id="username" placeholder="Nombre de usuario" />
+          <div id="username-error" class="error-message"></div>
+          <input type="password" id="password" placeholder="Contraseña" />
+          <div id="password-error" class="error-message"></div>
+          <button type="button" onclick="registerUser()">
+            Añadir estudiante
+          </button>
+          <div id="userFeedback"></div>
+        </form>
+      </div>
+    </div>
+    <!--- ADD STUDENT MODAL -->
+    <h2>Añade nuevo estudiante</h2>
+    <div id="modal-detail-create-student" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalStudent()">&times;</span>
+        <form id="create-student">
+          <h3>Registro de nuevo estudiante</h3>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Nombre del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentSurname"
+            placeholder="Apellidos del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentGrade"
+            placeholder="Curso del estudiante"
+            required
+          />
+          <input
+            type="date"
+            id="studentBirth"
+            placeholder="Fecha de nacimiento"
+            required
+          />
+          <button type="button" onclick="registerStudent()">
+            Añadir estudiante
+          </button>
+          <div id="userFeedback"></div>
+        </form>
+      </div>
+    </div>
+    <script src="admin.js"></script>
+  </body>
+</html>

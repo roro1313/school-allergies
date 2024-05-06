@@ -1,68 +1,65 @@
-.background-image {
-  position: fixed;
-  top: 0;
-  width: 100%;
+.container {
+  display: flex;
   height: 100%;
-  background-image: url("../../assets/img/fondodetail.jpg"); /* Ruta de tu imagen de fondo */
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
 }
 
-.card-lateral {
-  background-color: #ebb268;
+.sidebar {
   width: 25%;
+  background-color: #f2f2f2;
   padding: 20px;
-  margin-right: 20px;
-  height: 100%;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  float: left;
+  box-sizing: border-box;
 }
 
-.card-lateral img {
-  width: 100px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-  border-radius: 50%;
+.main-content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.info-label {
-  font-weight: 700;
-  text-transform: uppercase;
+h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.info-detail {
-  text-transform: capitalize;
-}
-
-#studentInfo {
-  margin: 10%;
-}
-
-#tableContainer table {
-  width: max-content;
-}
-
-#tableContainer th,
-#tableContainer td {
-  border-right: none;
-  border-bottom: solid 1px black;
+.search-input {
+  width: calc(100% - 100px);
   padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  box-sizing: border-box;
 }
 
-button {
+.search-btn {
   padding: 10px 20px;
-  background-color: #526c89;
+  background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
-button:hover {
-  background-color: #0056b3;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
 .modal {
   display: none; /* Ocultar por defecto */
   position: relative;
@@ -119,8 +116,9 @@ button:hover {
   cursor: pointer;
 }
 
-/* MODAL CREAR ALERGIAS */
-#modal-detail-create-allergy {
+/* ESTILOS MODAL DE CREAR USUARIO */
+
+#modal-detail-create-student {
   display: none;
   position: fixed;
   z-index: 1;
@@ -134,29 +132,33 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-detail-create-allergy.modal-content {
+#modal-detail-create-student.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 80%
 }
 
-#modal-detail-create-allergy.close {
+#modal-detail-create-student.close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#modal-detail-create-allergy.close:hover,
-#modal-detail-create-allergy.close:focus {
+#modal-detail-create-student.close:hover,
+#modal-detail-create-student.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-/* MODAL CREAR CRISIS */
-#modal-detail-create-crisis {
+
+
+
+/* ESTILOS MODAL DE CREAR ESTUDIANTE */
+
+#modal-detail-create-student {
   display: none;
   position: fixed;
   z-index: 1;
@@ -170,23 +172,23 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-detail-create-crisis.modal-content {
+#modal-detail-create-student.modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 80%
 }
 
-#modal-detail-create-crisis.close {
+#modal-detail-create-student.close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#modal-detail-create-crisis.close:hover,
-#modal-detail-create-crisis.close:focus {
+#modal-detail-create-student.close:hover,
+#modal-detail-create-student.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;

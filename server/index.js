@@ -2,10 +2,36 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const mongodb = require("mongodb");
+const jwt = require('jsonwebtoken');
 
-// Middleware
+//app.use(express.static("public"));
+
+// JWT authentication middleware
+function authenticateToken(usertypes) {
+  return function(req, res, next) {
+    const token = req.headers.authorization;
+    if (!token) return res.status(401).json({ error: true, message: "🟥 Unauthorized" });
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) return res.status(403).json({ error: true, message: "🟥 Forbidden" });
+      const usertype = decoded.usertype;
+      if (!usertypes.includes(usertype)) {
+        // Usertype not allowed and return error message
+        return res.status(403).json({ error: true, message: "🟥 Forbidden" });
+      }
+      next();
+    });
+  };
+}
+
+// Middleware bodyparser
 app.use(bodyParser.json());
+
+app.use(express.json());
+app.use(cors());
+
 
 // MongoDB Connection
 const MongoClient = mongodb.MongoClient;
@@ -25,7 +51,32 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-app.get("/students", async (req, res) => {
+// LOGIN
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    if (!username || !password) {
+      return res.status(400).json({ error: true, message: "🟥 Username and password are required" });
+    }
+
+    const userdata = await db.collection("user-data-login").findOne({ username, password });
+    if (!userdata) {
+      return res.status(401).json({ error: true, message: "🟥 Invalid username or password" });
+    }
+
+    const usertype = userdata.usertype;
+    const token = jwt.sign({ username, usertype }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(200).json({ error: false, message: "Login successful", token, usertype });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: true, message: "🟥 Internal server error" });
+  }
+});
+
+
+app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   if (!db) {
     return res.send({ error: true, response: "🟥 Database not connected" });
   }
@@ -40,18 +91,23 @@ app.get("/students", async (req, res) => {
   }
 });
 
-app.post("/students", async (req, res) => {
+app.post("/students", authenticateToken(["admin"]), async (req, res) => {
   try {
-    const student = await db.collection("students").findOne({ userId: req.body.userId });
-    student.length === 0
-      ? res.send({ error: true, response: "No results" })
-      : res.send({ error: false, response: student });
+    const searchQuery = { userId: { $regex: req.body.userId, $options: 'i' } }; 
+    const students = await db.collection("students").find(searchQuery).toArray();
+    
+    if (students.length === 0) {
+      res.send({ error: true, response: "No results" });
+    } else {
+      res.send({ error: false, response: students });
+    }
   } catch (error) {
     res.send({ error: true, response: error });
   }
 });
 
-app.post("/students/new-student", async (req, res) => {
+
+app.post("/students/new-student", authenticateToken(["admin"]), async (req, res) => {
   try {
     const newStudent = await db.collection("students").insertOne({
       studentName: req.body.studentName,
@@ -77,7 +133,7 @@ app.post("/students/new-student", async (req, res) => {
   }
 });
 
-app.post("/students/new-allergy", async (req, res) => {
+app.post("/students/new-allergy", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const newAllergy = await db.collection("students").updateOne(
       { userId: req.body.userId },
@@ -109,7 +165,7 @@ app.post("/students/new-allergy", async (req, res) => {
   }
 });
 
-app.post("/students/new-crisis", async (req, res) => {
+app.post("/students/new-crisis", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
     const newCrisis = await db.collection("students").updateOne(
       { userId: req.body.userId, "allergies.allergy": req.body.allergy },
