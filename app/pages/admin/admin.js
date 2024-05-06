@@ -56,6 +56,7 @@ function displayStudents(students) {
           .map((allergyObj) => allergyObj.allergy)
           .join(", ")}</td>
         <td><button onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
+        <td><button onclick="deleteStudent('${student.userId}')">🗑️</button></td>
       </tr>`;
     tableBody.innerHTML += row;
   });

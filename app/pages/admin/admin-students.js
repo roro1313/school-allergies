@@ -136,3 +136,44 @@ async function registerStudent() {
     console.error("Error al registrar el estudiante:", error);
   }
 }
+
+// BORRAR ESTUDIANTE
+
+async function deleteStudent(userId) {
+    const token = localStorage.getItem("token");
+    const usertype = localStorage.getItem("usertype");
+  
+    try {
+      const response = await fetch(
+        "https://school-allergies.onrender.com/students/delete-student",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            Usertype: usertype,
+          },
+          body: JSON.stringify({
+            userId: userId,
+          }),
+        }
+      );
+  
+      const data = await response.json();
+      const userFeedback = document.getElementById("deleteFeedback");
+  
+      if (response.ok) {
+        console.log("Estudiante borrado correctamente:", data);
+        userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Estudiante borrado correctamente.</p></div>`;
+        setTimeout(() => {
+          userFeedback.innerHTML = "";
+          window.location.reload();
+        }, 1500);
+      } else {
+        console.log("Error al borrar el estudiante:", data);
+        userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al borrar estudiante.</p></div>`;
+      }
+    } catch (error) {
+      console.error("Error al borrar el estudiante:", error);
+    }
+  }
