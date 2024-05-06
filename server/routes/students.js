@@ -4,7 +4,7 @@ const authenticateToken = require("../middleware/authenticateToken");
 
 // SEARCH
 router.post(
-    "/students",
+    "/",
     authenticateToken(["admin", "user"]),
     async (req, res) => {
       try {
