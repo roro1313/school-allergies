@@ -72,7 +72,7 @@ app.post("/login", async (req, res) => {
 });
 
 
-app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
+/* app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   if (!db) {
     return res.send({ error: true, response: "🟥 Database not connected" });
   }
@@ -85,7 +85,7 @@ app.get("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   } catch (error) {
     res.send({ error: true, response: error });
   }
-});
+}); */
 
 app.post("/students", authenticateToken(["admin", "user"]), async (req, res) => {
   try {
