@@ -50,11 +50,9 @@
           <li class="speed-dial-item" onclick="openEditUserModal()">
             Editar usuario
           </li>
-          <!-- NO HACER NADA CON ESTO -->
           <li class="speed-dial-item" onclick="openDeleteUserModal()">
             Borrar usuario
           </li>
-          <!-- NO HACER NADA CON ESTO -->
         </ul>
       </div>
     </div>
@@ -109,42 +107,42 @@
       </div>
     </div>
     <!-- EDIT STUDENT MODAL -->
-<div id="modal-detail-edit-student" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModalEditStudent()">&times;</span>
-    <form id="create-student">
-      <h3>Editar estudiante</h3>
-      <input
-        type="text"
-        id="studentNameEdit"
-        placeholder="Nombre del estudiante"
-        required
-      />
-      <input
-        type="text"
-        id="studentSurnameEdit"
-        placeholder="Apellidos del estudiante"
-        required
-      />
-      <input
-        type="text"
-        id="studentGradeEdit"
-        placeholder="Curso del estudiante"
-        required
-      />
-      <input
-        type="date"
-        id="studentBirthEdit"
-        placeholder="Fecha de nacimiento"
-        required
-      />
-      <button type="button" id="buttonEdit">
-        Editar estudiante
-      </button>
-      <div id="userFeedback"></div>
-    </form>
-  </div>
-</div>
+    <div id="modal-detail-edit-student" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalEditStudent()">&times;</span>
+        <form id="create-student">
+          <h3>Editar estudiante</h3>
+          <input
+            type="text"
+            id="studentNameEdit"
+            placeholder="Nombre del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentSurnameEdit"
+            placeholder="Apellidos del estudiante"
+            required
+          />
+          <input
+            type="text"
+            id="studentGradeEdit"
+            placeholder="Curso del estudiante"
+            required
+          />
+          <input
+            type="date"
+            id="studentBirthEdit"
+            placeholder="Fecha de nacimiento"
+            required
+          />
+          <button type="button" id="buttonEdit">
+            Editar estudiante
+          </button>
+          <div id="editFeedback"></div>
+        </form>
+      </div>
+    </div>
     <script src="admin.js"></script>
     <script src="admin-users.js"></script>
     <script src="admin-students.js"></script>

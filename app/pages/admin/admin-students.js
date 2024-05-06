@@ -54,14 +54,15 @@ async function editStudent(userId) {
     );
 
     const data = await response.json();
-    const userFeedback = document.getElementById("userFeedback");
+    const userFeedback = document.getElementById("editFeedback");
 
     if (response.ok) {
       console.log("Estudiante editado correctamente:", data);
       userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Estudiante editado correctamente.</p></div>`;
       setTimeout(() => {
         userFeedback.innerHTML = "";
-        closeModalStudent();
+        closeModalEditStudent();
+        window.location.reload();
       }, 1500);
     } else {
       console.log("Error al editar el estudiante:", data);
