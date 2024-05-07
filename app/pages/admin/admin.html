@@ -32,6 +32,8 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Alergias</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <div id="deleteFeedback"></div>
@@ -65,9 +67,11 @@
           <input type="text" id="username" placeholder="Nombre de usuario" />
           <div id="username-error" class="error-message"></div>
           <input type="password" id="password" placeholder="Contraseña" />
-          <div id="password-error" class="error-message"></div>
+          <div id="username-error" class="error-message"></div>
+          <button type="button" id="admin" class="button" onclick="selectUserType('admin')">Admin</button>
+          <button type="button" id="user" class="button selected" onclick="selectUserType('user')">User</button>
           <button type="button" onclick="registerUser()">
-            Añadir estudiante
+            Añadir usuario
           </button>
           <div id="userFeedback"></div>
         </form>
