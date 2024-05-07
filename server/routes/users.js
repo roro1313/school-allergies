@@ -4,31 +4,38 @@ const authenticateToken = require("../middleware/authenticateToken");
 
 // USERS
 router.post(
-    "/new-user",
-    authenticateToken(["admin"]),
-    async (req, res) => {
-      try {
-        const newUser = await db.collection("user-data-login").insertOne({
-          username: req.body.username,
-          usertype: req.body.usertype,
-          password: req.body.password,
-        });
-  
-        res.json({
-          error: false,
-          response: newUser,
-          message: "User successfully created",
-        });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({
+  "/new-user",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const existingUser = await db.collection("user-data-login").findOne({ username: req.body.username });
+      if (existingUser) {
+        return res.status(400).json({
           error: true,
-          response: error,
-          message: "User not created",
+          message: "Username already exists"
         });
       }
+      const newUser = await db.collection("user-data-login").insertOne({
+        username: req.body.username,
+        usertype: req.body.usertype,
+        password: req.body.password,
+      });
+
+      res.json({
+        error: false,
+        response: newUser,
+        message: "User successfully created",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error: true,
+        response: error,
+        message: "User not created",
+      });
     }
-  );
+  }
+);
   router.put(
     "/edit-user",
     authenticateToken(["admin"]),
