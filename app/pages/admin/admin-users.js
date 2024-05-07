@@ -63,7 +63,11 @@ async function registerUser() {
       }, 1500);
     } else {
       console.log("Error al registrar el usuario:", data);
-      userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al registrar usuario.</p></div>`;
+      if (data.error && data.message === "Username already exists") {
+        userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>El nombre de usuario ya existe.</p></div>`;
+      } else {
+        userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al registrar usuario.</p></div>`;
+      }
     }
   } catch (error) {
     console.error("Error al registrar el usuario:", error);
