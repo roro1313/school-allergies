@@ -2,6 +2,34 @@ const express = require("express");
 const router = express.Router();
 const authenticateToken = require("../middleware/authenticateToken");
 
+// SEARCH
+router.post(
+  "/",
+  authenticateToken(["admin"]),
+  async (req, res) => {
+    try {
+      const searchQuery = {
+        username: { $regex: req.body.username, $options: "i" },
+      };
+      const users = await db
+        .collection("user-data-login")
+        .find(searchQuery)
+        .toArray();
+
+      if (users.length === 0) {
+        res.send({ error: true, response: "No results" });
+      } else {
+        res.send({
+          error: false,
+          response: users,
+        });
+      }
+    } catch (error) {
+      res.send({ error: true, response: error });
+    }
+  }
+);
+
 // USERS
 router.post(
   "/new-user",
