@@ -10,7 +10,7 @@ window.addEventListener("click", function (event) {
   }
 });
 
-// BÚSQUEDA
+// BÚSQUEDA STUDENTS
 async function searchStudents() {
   const searchValue = document.getElementById("searchInput").value;
   const token = localStorage.getItem("token");
@@ -65,4 +65,51 @@ function displayStudents(students) {
 function redirectToDetail(userId) {
   localStorage.setItem("userId", userId);
   window.location.href = `../detail/detail.html?userId=${userId}`;
+}
+
+// BÚSQUEDA USERS
+async function searchUsers() {
+  const searchValue = document.getElementById("searchUsersInput").value;
+  const token = localStorage.getItem("token");
+  const usertype = localStorage.getItem("usertype");
+
+  try {
+    const response = await fetch(
+      "https://school-allergies.onrender.com/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Usertype: usertype,
+        },
+        body: JSON.stringify({ userId: searchValue }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      displayUsers(data.response);
+    } else {
+      console.log(data.response); // Show error message if search fails
+    }
+  } catch (error) {
+    console.error(error);
+    console.error("An error occurred. Please try again later."); // Show error message
+  }
+}
+
+function displayUsers(users) {
+  const tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+  users.map((user) => {
+    const row =
+      `<tr>
+        <td>${user.username}</td>
+        <td><button onclick="openEditUserModal('${user.username}', '${user.password}')">✏️</button></td>
+        <td><button onclick="deleteUser('${user.username}')">🗑️</button></td>
+      </tr>`;
+    tableBody.innerHTML += row;
+  });
 }

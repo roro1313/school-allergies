@@ -16,30 +16,56 @@
         <h4>Admin</h4>
       </div>
       <div class="main-content">
-        <form id="searchForm">
-          <input
-            type="text"
-            id="searchInput"
-            class="search-input"
-            placeholder="Escribe para buscar usuarios"
-          />
-          <button type="button" onclick="searchStudents()">🔍</button>
-        </form>
-          <!-- Results table -->
-          <table id="resultsTable">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Alergias</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <div id="deleteFeedback"></div>
-            <tbody id="tableBody">
-                <!-- Search results will be printed here from JavaScript -->
-            </tbody>
+        <section>
+          <form id="searchForm">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Escribe para buscar estudiantes"
+            />
+            <button type="button" onclick="searchStudents()">🔍</button>
+          </form>
+            <!-- Results table -->
+            <table id="resultsTable">
+              <thead>
+                  <tr>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Alergias</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <div id="deleteFeedback"></div>
+              <tbody id="tableBody">
+                  <!-- Search results will be printed here from JavaScript -->
+              </tbody>
+          </section>
+          <section>
+            <form id="searchUsersForm">
+              <input
+                type="text"
+                id="searchUsersInput"
+                class="search-input"
+                placeholder="Escribe para buscar usuarios"
+              />
+              <button type="button" onclick="searchUsers()">🔍</button>
+            </form>
+              <!-- Results table -->
+              <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Nombre de usuario</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <div id="deleteFeedback"></div>
+                <tbody id="tableUsersBody">
+                    <!-- Search results will be printed here from JavaScript -->
+                </tbody>
+          </section>
         <!-- + Button with menu -->
         <button class="plus-menu" onclick="toggleMenu()">+</button>
         <ul class="speed-dial" id="speedDial">
@@ -48,12 +74,6 @@
           </li>
           <li class="speed-dial-item" onclick="openCreateStudentModal()">
             Crear estudiante
-          </li>
-          <li class="speed-dial-item" onclick="openEditUserModal()">
-            Editar usuario
-          </li>
-          <li class="speed-dial-item" onclick="openDeleteUserModal()">
-            Borrar usuario
           </li>
         </ul>
       </div>
