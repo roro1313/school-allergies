@@ -8,9 +8,13 @@ router.post(
   authenticateToken(["admin"]),
   async (req, res) => {
     try {
-      const searchQuery = {
-        username: { $regex: req.body.username, $options: "i" },
-      };
+      let searchQuery = {};
+      if (req.body.username.trim() !== "") {
+        searchQuery = {
+          username: { $regex: req.body.username, $options: "i" },
+        };
+      }
+      
       const users = await db
         .collection("user-data-login")
         .find(searchQuery)
