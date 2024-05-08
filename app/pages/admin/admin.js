@@ -55,8 +55,8 @@ function displayStudents(students) {
         <td ${onClick}>${student.allergies
           .map((allergyObj) => allergyObj.allergy)
           .join(", ")}</td>
-        <td><button onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
-        <td><button onclick="deleteStudent('${student.userId}')">🗑️</button></td>
+        <td style="text-align:center;"><button class="action-button" onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
+        <td style="text-align:center;"><button class="action-button" onclick="deleteStudent('${student.userId}')">🗑️</button></td>
       </tr>`;
     tableBody.innerHTML += row;
   });

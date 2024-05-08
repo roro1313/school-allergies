@@ -60,7 +60,6 @@ async function studentDetail() {
       );
       // Show tables with allergies info
       displayTables(data.response);
-
     } else {
       console.log(data.response); // Show error message if search fails
       const errorMessage = document.getElementById("errorMessage");
@@ -74,46 +73,53 @@ async function studentDetail() {
 }
 
 function displayTables(students) {
+  const usertype = localStorage.getItem("usertype");
   const tableContainer = document.getElementById("tableInfoContainer");
   tableContainer.innerHTML = "";
 
   students.forEach((student) => {
     // For each allergy print a table with allergy detail
     const tableHTML = `
-        <h1>${student.studentName}'s allergies</h1>
+        <h3>Estudiante: ${student.studentName} ${student.studentSurname}</h3>
         ${student.allergies
-         .map(
+          .map(
             (allergy) => `
-          <h3>${allergy.allergy} - ${allergy.medication}</h3>
-          <table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Alergia: ${allergy.allergy}</th>
+                  <th colspan="2">Medicación: ${allergy.medication}</th>
+                  ${usertype === "admin" ? 
+                    `<th style="text-align:center;><button class="action-button" onclick="deleteAllergy('${allergy.allergy}')">❌</button></th>`: ``}
+                </tr>
+              </thead>
             <thead>
               <tr>
                 <th>Crisis</th>
                 <th>Fecha</th>
-                <th>Información</th>
+                <th colspan="2">Información</th>
               </tr>
             </thead>
             <tbody>
-              ${
-                allergy.crisis.length === 0
-                 ? `<tr><td colspan="3">Esta alergia no tiene registradas crisis</td></tr>`
-                  : allergy.crisis
-                     .map(
-                        (crisis) => `
-                      <tr>
+              ${allergy.crisis.length === 0
+                  ? `<tr><td colspan="3">Esta alergia no tiene registradas crisis</td>${
+                      usertype === "admin" ? "<td></td>" : ""
+                    }</tr>`
+                  : allergy.crisis.map((crisis) => 
+                    `<tr>
                         <td>${crisis.type}</td>
                         <td>${crisis.timestamp}</td>
                         <td>${crisis.information}</td>
-                      </tr>
-                    `
-                      )
-                     .join("")
-              }
+                        ${
+                          usertype === "admin" &&
+                          `<td style="text-align:center;"><button class="action-button" onclick="deleteCrisis('${student.username}','${allergy.allergy}','${crisis.type}')">🗑️</button></td>`
+                        }
+                      </tr>`).join("")}
             </tbody>
           </table>
         `
           )
-         .join("")}
+          .join("")}
       `;
     const tableElement = document.createElement("div");
     tableElement.innerHTML = tableHTML;

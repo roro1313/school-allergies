@@ -200,6 +200,19 @@ select:focus {
   .execute-button:hover {
     background-color: #031222;
   }
+
+  .action-button {
+    border: none;
+    background: transparent;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 10px;
+  }
+
+  .action-button:hover {
+    background: transparent;
+    cursor: pointer;
+  }
   
   .feedback {
     margin-top: 10px;
@@ -221,8 +234,8 @@ select:focus {
   }
   
   th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 0.5px solid #ddd;
+    padding: 5px;
     text-align: left;
   }
   

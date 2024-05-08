@@ -1,167 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin panel</title>
-  <link rel="stylesheet" href="admin.css">
-  <link rel="stylesheet" href="../../assets/styles/global.css">
-</head>
-<body>
-  <div class="container">
-    <div class="sidebar">
-      <!-- Logo -->
-      <img src="https://placehold.co/100x100" alt="Logo">
-      <!-- Sidebar -->
-      <h4>Admin</h4>
-      <!-- Botones para elegir entre estudiantes o usuarios -->
-      <button onclick="showSection('students')">Estudiantes</button>
-      <button onclick="showSection('users')">Usuarios</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="../../assets/styles/global.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <!-- Logo -->
+        <img src="https://placehold.co/100x100" alt="Logo" />
+        <!-- Sidebar -->
+        <h4>Admin</h4>
+        <!-- Botones para elegir entre estudiantes o usuarios -->
+        <button onclick="showSection('students')">Estudiantes</button>
+        <button onclick="showSection('users')">Usuarios</button>
+      </div>
+      <div class="main-content">
+        <!-- Sección de estudiantes -->
+        <section id="students-section">
+          <form id="searchForm">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Escribe para buscar estudiantes"
+            />
+            <button type="button" onclick="searchStudents()">🔍</button>
+          </form>
+          <!-- Tabla de resultados -->
+          <table id="resultsTable">
+            <!-- Cabecera de la tabla -->
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th colspan="3">Alergias</th>
+              </tr>
+            </thead>
+            <!-- Cuerpo de la tabla (resultados se imprimirán aquí desde JavaScript) -->
+            <tbody id="tableBody"></tbody>
+          </table>
+        </section>
+        <!-- Sección de usuarios -->
+        <section id="users-section" class="hidden">
+          <form id="searchUsersForm">
+            <input
+              type="text"
+              id="searchUsersInput"
+              class="search-input"
+              placeholder="Escribe para buscar usuarios"
+            />
+            <button type="button" onclick="searchUsers()">🔍</button>
+          </form>
+          <!-- Tabla de resultados -->
+          <table id="resultsTable">
+            <!-- Cabecera de la tabla -->
+            <thead>
+              <tr>
+                <th colspan="3">Nombre de usuario</th>
+                <!--               <th></th>
+              <th></th> -->
+              </tr>
+            </thead>
+            <!-- Cuerpo de la tabla (resultados se imprimirán aquí desde JavaScript) -->
+            <tbody id="tableUsersBody"></tbody>
+          </table>
+        </section>
+        <!-- Botón flotante con menú -->
+        <button class="plus-menu" onclick="toggleMenu()">+</button>
+        <!-- Menú de acceso rápido -->
+        <ul class="speed-dial" id="speedDial">
+          <li class="speed-dial-item" onclick="openCreateUserModal()">
+            Crear usuario
+          </li>
+          <li class="speed-dial-item" onclick="openCreateStudentModal()">
+            Crear estudiante
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="main-content">
-      <!-- Sección de estudiantes -->
-      <section id="students-section">
-        <form id="searchForm">
-          <input
-            type="text"
-            id="searchInput"
-            class="search-input"
-            placeholder="Escribe para buscar estudiantes"
-          />
-          <button type="button" onclick="searchStudents()">🔍</button>
+    <!-- MODAL PARA CREAR USUARIO -->
+    <div id="modal-detail-create-user" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalUser()">&times;</span>
+        <h4 class="modal-title">Registro de nuevo usuario</h4>
+        <form id="create-user">
+          <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" placeholder="Nombre de usuario" />
+            <div id="username-error" class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="Contraseña" />
+            <div id="password-error" class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <button
+              type="button"
+              id="admin"
+              class="button"
+              onclick="selectUserType('admin')"
+            >
+              Admin
+            </button>
+            <button
+              type="button"
+              id="user"
+              class="button selected"
+              onclick="selectUserType('user')"
+            >
+              User
+            </button>
+          </div>
+          <button type="button" onclick="registerUser()" class="execute-button">
+            Añadir usuario
+          </button>
+          <div id="userFeedback"></div>
         </form>
-        <!-- Tabla de resultados -->
-        <table id="resultsTable">
-          <!-- Cabecera de la tabla -->
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Alergias</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <!-- Cuerpo de la tabla (resultados se imprimirán aquí desde JavaScript) -->
-          <tbody id="tableBody"></tbody>
-        </table>
-      </section>
-      <!-- Sección de usuarios -->
-      <section id="users-section" class="hidden">
-        <form id="searchUsersForm">
-          <input
-            type="text"
-            id="searchUsersInput"
-            class="search-input"
-            placeholder="Escribe para buscar usuarios"
-          />
-          <button type="button" onclick="searchUsers()">🔍</button>
-        </form>
-        <!-- Tabla de resultados -->
-        <table id="resultsTable">
-          <!-- Cabecera de la tabla -->
-          <thead>
-            <tr>
-              <th>Nombre de usuario</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <!-- Cuerpo de la tabla (resultados se imprimirán aquí desde JavaScript) -->
-          <tbody id="tableUsersBody"></tbody>
-        </table>
-      </section>
-      <!-- Botón flotante con menú -->
-      <button class="plus-menu" onclick="toggleMenu()">+</button>
-      <!-- Menú de acceso rápido -->
-      <ul class="speed-dial" id="speedDial">
-        <li class="speed-dial-item" onclick="openCreateUserModal()">Crear usuario</li>
-        <li class="speed-dial-item" onclick="openCreateStudentModal()">Crear estudiante</li>
-      </ul>
+      </div>
     </div>
-  </div>
-<!-- MODAL PARA CREAR USUARIO -->
-<div id="modal-detail-create-user" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModalUser()">&times;</span>
-    <h4 class="modal-title">Registro de nuevo usuario</h4>
-    <form id="create-user">
-      <div class="form-group">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" id="username" placeholder="Nombre de usuario">
-        <div id="username-error" class="error-message"></div>
+    <!-- MODAL PARA CREAR ESTUDIANTE -->
+    <div id="modal-detail-create-student" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalStudent()">&times;</span>
+        <h4 class="modal-title">Registro de nuevo estudiante</h4>
+        <form id="create-student">
+          <div class="form-group">
+            <label for="studentName">Nombre del estudiante</label>
+            <input type="text" id="studentName" required />
+          </div>
+          <div class="form-group">
+            <label for="studentSurname">Apellidos del estudiante</label>
+            <input type="text" id="studentSurname" required />
+          </div>
+          <div class="form-group">
+            <label for="studentGrade">Curso del estudiante</label>
+            <input type="text" id="studentGrade" required />
+          </div>
+          <div class="form-group">
+            <label for="studentBirth">Fecha de nacimiento</label>
+            <input type="date" id="studentBirth" required />
+          </div>
+          <button
+            type="button"
+            onclick="registerStudent()"
+            class="execute-button"
+          >
+            Añadir estudiante
+          </button>
+          <div id="studentFeedback"></div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Contraseña">
-        <div id="password-error" class="error-message"></div>
+    </div>
+    <!-- MODAL PARA EDITAR ESTUDIANTE -->
+    <div id="modal-detail-edit-student" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalEditStudent()">&times;</span>
+        <h4 class="modal-title">Editar estudiante</h4>
+        <form id="edit-student">
+          <div class="form-group">
+            <label for="studentNameEdit">Nombre del estudiante</label>
+            <input
+              type="text"
+              id="studentNameEdit"
+              placeholder="Nombre del estudiante"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="studentSurnameEdit">Apellidos del estudiante</label>
+            <input
+              type="text"
+              id="studentSurnameEdit"
+              placeholder="Apellidos del estudiante"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="studentGradeEdit">Curso del estudiante</label>
+            <input
+              type="text"
+              id="studentGradeEdit"
+              placeholder="Curso del estudiante"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="studentBirthEdit">Fecha de nacimiento</label>
+            <input
+              type="date"
+              id="studentBirthEdit"
+              placeholder="Fecha de nacimiento"
+              required
+            />
+          </div>
+          <button type="button" id="buttonEdit" class="execute-button">
+            Editar estudiante
+          </button>
+          <div id="editFeedback"></div>
+        </form>
       </div>
-      <div class="form-group">
-        <button type="button" id="admin" class="button" onclick="selectUserType('admin')">Admin</button>
-        <button type="button" id="user" class="button selected" onclick="selectUserType('user')">User</button>
-      </div>
-      <button type="button" onclick="registerUser()" class="execute-button">Añadir usuario</button>
-      <div id="userFeedback"></div>
-    </form>
-  </div>
-</div>
-<!-- MODAL PARA CREAR ESTUDIANTE -->
-<div id="modal-detail-create-student" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModalStudent()">&times;</span>
-    <h4 class="modal-title">Registro de nuevo estudiante</h4>
-    <form id="create-student">
-      <div class="form-group">
-        <label for="studentName">Nombre del estudiante</label>
-        <input type="text" id="studentName" required>
-      </div>
-      <div class="form-group">
-        <label for="studentSurname">Apellidos del estudiante</label>
-        <input type="text" id="studentSurname" required>
-      </div>
-      <div class="form-group">
-        <label for="studentGrade">Curso del estudiante</label>
-        <input type="text" id="studentGrade" required>
-      </div>
-      <div class="form-group">
-        <label for="studentBirth">Fecha de nacimiento</label>
-        <input type="date" id="studentBirth" required>
-      </div>
-      <button type="button" onclick="registerStudent()" class="execute-button">Añadir estudiante</button>
-      <div id="studentFeedback"></div>
-    </form>
-  </div>
-</div>
-<!-- MODAL PARA EDITAR ESTUDIANTE -->
-<div id="modal-detail-edit-student" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModalEditStudent()">&times;</span>
-    <h4 class="modal-title">Editar estudiante</h4>
-    <form id="edit-student">
-      <div class="form-group">
-        <label for="studentNameEdit">Nombre del estudiante</label>
-        <input type="text" id="studentNameEdit" placeholder="Nombre del estudiante" required>
-      </div>
-      <div class="form-group">
-        <label for="studentSurnameEdit">Apellidos del estudiante</label>
-        <input type="text" id="studentSurnameEdit" placeholder="Apellidos del estudiante" required>
-      </div>
-      <div class="form-group">
-        <label for="studentGradeEdit">Curso del estudiante</label>
-        <input type="text" id="studentGradeEdit" placeholder="Curso del estudiante" required>
-      </div>
-      <div class="form-group">
-        <label for="studentBirthEdit">Fecha de nacimiento</label>
-        <input type="date" id="studentBirthEdit" placeholder="Fecha de nacimiento" required>
-      </div>
-      <button type="button" id="buttonEdit" class="execute-button">Editar estudiante</button>
-      <div id="editFeedback"></div>
-    </form>
-  </div>
-</div>
+    </div>
 
-  <script src="admin.js"></script>
-  <script src="admin-users.js"></script>
-  <script src="admin-students.js"></script>
-</body>
+    <script src="admin.js"></script>
+    <script src="admin-users.js"></script>
+    <script src="admin-students.js"></script>
+  </body>
 </html>
