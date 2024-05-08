@@ -211,3 +211,26 @@ select:focus {
     font-weight: bolder;
     font-size: 8px !important;
   }
+
+  /* TABLE STYLES */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  tr:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
