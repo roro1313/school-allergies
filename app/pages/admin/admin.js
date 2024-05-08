@@ -113,3 +113,13 @@ function displayUsers(users) {
     tableBody.innerHTML += row;
   });
 }
+
+// CAMBIO SECCION
+function showSection(sectionName) {
+  const sections = document.querySelectorAll('.main-content > section');
+  sections.forEach(section => {
+    section.classList.add('hidden');
+  });
+  const selectedSection = document.getElementById(`${sectionName}-section`);
+  selectedSection.classList.remove('hidden');
+}
