@@ -128,6 +128,7 @@ async function registerStudent() {
       setTimeout(() => {
         userFeedback.innerHTML = "";
         closeModalStudent();
+        window.location.reload();
       }, 1500);
     } else {
       console.log("Error al registrar el estudiante:", data);
