@@ -203,6 +203,11 @@ select:focus {
   
   .feedback {
     margin-top: 10px;
-    color: red;
   }
-  
+
+  .feedback p {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bolder;
+    font-size: 8px !important;
+  }
