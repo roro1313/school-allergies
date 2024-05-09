@@ -24,3 +24,10 @@ body {
     width: 80%;
   }
 }
+
+.logo-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.5rem;
+}

@@ -48,15 +48,20 @@ function displayStudents(students) {
   tableBody.innerHTML = "";
   students.map((student) => {
     const onClick = `onclick="redirectToDetail('${student.userId}')"`;
-    const row = 
-      `<tr>
+    const row = `<tr>
         <td ${onClick}>${student.studentName}</td>
         <td ${onClick}>${student.studentSurname}</td>
         <td ${onClick}>${student.allergies
-          .map((allergyObj) => allergyObj.allergy)
-          .join(", ")}</td>
-        <td style="text-align:center;"><button class="action-button" onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
-        <td style="text-align:center;"><button class="action-button" onclick="deleteStudent('${student.userId}')">🗑️</button></td>
+      .map((allergyObj) => allergyObj.allergy)
+      .join(", ")}</td>
+        <td style="text-align:center;"><button class="action-button" onclick="openEditStudentModal('${
+          student.studentName
+        }', '${student.studentSurname}', '${student.studentGrade}', '${
+      student.studentBirth
+    }', '${student.userId}')">✏️</button></td>
+        <td style="text-align:center;"><button class="action-button" onclick="deleteStudent('${
+          student.userId
+        }')">🗑️</button></td>
       </tr>`;
     tableBody.innerHTML += row;
   });
@@ -105,8 +110,7 @@ function displayUsers(users) {
   const tableBody = document.getElementById("tableUsersBody");
   tableBody.innerHTML = "";
   users.forEach((user) => {
-    const row =
-      `<tr>
+    const row = `<tr>
         <td style="width:70%;">${user.username}</td>
         <td style="width:15%;text-align:center;"><button class="action-button" onclick="openEditUserModal('${user.username}', '${user.password}', '${user.usertype}')">✏️</button></td>
         <td style="width:15%;text-align:center;><button class="action-button" onclick="deleteUser('${user.username}')">🗑️</button></td>
@@ -114,13 +118,39 @@ function displayUsers(users) {
     tableBody.insertAdjacentHTML("beforeend", row);
   });
 }
-
-// CAMBIO SECCION
-function showSection(sectionName) {
-  const sections = document.querySelectorAll('.main-content > section');
-  sections.forEach(section => {
-    section.classList.add('hidden');
+document.addEventListener("DOMContentLoaded", function () {
+  const sections = document.querySelectorAll(".main-content > section");
+  sections.forEach((section) => {
+    if (section.id !== "main-section") {
+      section.classList.add("hidden");
+    } else {
+      section.classList.remove("hidden");
+    }
   });
+
+  document.getElementById("student-sec-button").addEventListener("click", function () {
+    showSection("students");
+  });
+
+  document.getElementById("users-sec-button").addEventListener("click", function () {
+    showSection("users");
+  });
+});
+
+function showSection(sectionName) {
+  const sections = document.querySelectorAll(".main-content > section");
+  sections.forEach((section) => {
+    section.classList.add("hidden");
+  });
+
   const selectedSection = document.getElementById(`${sectionName}-section`);
-  selectedSection.classList.remove('hidden');
+  selectedSection.classList.remove("hidden");
+
+  if (sectionName === "students") {
+    document.getElementById("students-section-button").classList.add("active-sec");
+    document.getElementById("users-section-button").classList.remove("active-sec");
+  } else {
+    document.getElementById("users-section-button").classList.add("active-sec");
+    document.getElementById("students-section-button").classList.remove("active-sec");
+  }
 }

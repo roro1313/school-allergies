@@ -10,17 +10,51 @@
   <body>
     <div class="container">
       <div class="sidebar">
-        <!-- Logo -->
-        <img src="https://placehold.co/100x100" alt="Logo" />
-        <!-- Sidebar -->
-        <h4>Admin</h4>
-        <!-- Botones para elegir entre estudiantes o usuarios -->
-        <button onclick="showSection('students')">Estudiantes</button>
-        <button onclick="showSection('users')">Usuarios</button>
+        <img
+          src="../../assets/img/logo-mini.png"
+          alt="Logo AlergiApp"
+          class="logo"
+        />
+        <h4>Administrador</h4>
+        <button
+          id="students-section-button"
+          class="button"
+          onclick="showSection('students')"
+        >
+          Estudiantes
+        </button>
+        <button
+          id="users-section-button"
+          class="button"
+          onclick="showSection('users')"
+        >
+          Usuarios
+        </button>
       </div>
       <div class="main-content">
-        <!-- Sección de estudiantes -->
-        <section id="students-section">
+        <section id="main-section">
+          <div>
+            <button
+              id="student-sec-button"
+              class="admin-menu button"
+              onclick="showSection('students')"
+            >
+              <img src="../../assets/img/admin-section.png" />
+            </button>
+            <p>Gestión de estudiantes</p>
+          </div>
+          <div>
+            <button
+              id="users-sec-button"
+              class="admin-menu button"
+              onclick="showSection('users')"
+            >
+              <img src="../../assets/img/student-section.png" />
+            </button>
+            <p>Gestión de usuarios</p>
+          </div>
+        </section>
+        <section id="students-section" class="hidden">
           <div id="deleteFeedback"></div>
           <form id="searchForm" class="search-form">
             <input
@@ -29,7 +63,13 @@
               class="search-input"
               placeholder="Escribe para buscar estudiantes"
             />
-            <button type="button" onclick="searchStudents()" class="search-button">🔍</button>
+            <button
+              type="button"
+              onclick="searchStudents()"
+              class="search-button"
+            >
+              🔍
+            </button>
           </form>
           <table id="resultsTable">
             <thead>
@@ -42,7 +82,6 @@
             <tbody id="tableBody"></tbody>
           </table>
         </section>
-        <!-- Sección de usuarios -->
         <section id="users-section" class="hidden">
           <div id="deleteFeedback"></div>
           <form id="searchUsersForm" class="search-form">
@@ -52,7 +91,9 @@
               class="search-input"
               placeholder="Escribe para buscar usuarios"
             />
-            <button type="button" onclick="searchUsers()" class="search-button">🔍</button>
+            <button type="button" onclick="searchUsers()" class="search-button">
+              🔍
+            </button>
           </form>
           <table id="resultsTable">
             <thead>
@@ -63,20 +104,17 @@
             <tbody id="tableUsersBody"></tbody>
           </table>
         </section>
-        <!-- Botón flotante con menú -->
         <button class="plus-menu" onclick="toggleMenu()">+</button>
-        <!-- Menú de acceso rápido -->
         <ul class="speed-dial" id="speedDial">
           <li class="speed-dial-item" onclick="openCreateUserModal()">
-            Crear usuario
+            🛡️ Crear usuario
           </li>
           <li class="speed-dial-item" onclick="openCreateStudentModal()">
-            Crear estudiante
+            👤 Crear estudiante
           </li>
         </ul>
       </div>
     </div>
-    <!-- MODAL PARA CREAR USUARIO -->
     <div id="modal-detail-create-user" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalUser()">&times;</span>
@@ -118,7 +156,6 @@
         </form>
       </div>
     </div>
-    <!-- MODAL PARA CREAR ESTUDIANTE -->
     <div id="modal-detail-create-student" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalStudent()">&times;</span>
@@ -151,7 +188,6 @@
         </form>
       </div>
     </div>
-    <!-- MODAL PARA EDITAR USUARIO -->
     <div id="modal-detail-edit-user" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalEditUser()">&times;</span>
@@ -159,7 +195,12 @@
         <form id="edit-user">
           <div class="form-group">
             <label for="username">Nombre de usuario</label>
-            <input type="text" id="usernameEdit" placeholder="Nombre de usuario" disabled />
+            <input
+              type="text"
+              id="usernameEdit"
+              placeholder="Nombre de usuario"
+              disabled
+            />
             <div id="username-error" class="error-message"></div>
           </div>
           <div class="form-group">
@@ -168,7 +209,6 @@
             <div id="password-error" class="error-message"></div>
           </div>
           <div class="form-group">
-            
             <button
               type="button"
               id="admin"
@@ -193,7 +233,6 @@
         </form>
       </div>
     </div>
-    <!-- MODAL PARA EDITAR ESTUDIANTE -->
     <div id="modal-detail-edit-student" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModalEditStudent()">&times;</span>
@@ -242,7 +281,6 @@
         </form>
       </div>
     </div>
-
     <script src="admin.js"></script>
     <script src="admin-users.js"></script>
     <script src="admin-students.js"></script>
