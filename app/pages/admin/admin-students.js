@@ -1,18 +1,14 @@
 // MODAL EDITAR ESTUDIANTE
-
 let modalEditStudent = document.getElementById("modal-detail-edit-student");
 
 function openEditStudentModal(name, surname, grade, birth, userId) {
   modalEditStudent.style.display = "block";
-  setTimeout(() => {
-    document.getElementById("studentNameEdit").value = name;
-    document.getElementById("studentSurnameEdit").value = surname;
-    document.getElementById("studentGradeEdit").value = grade;
-    document.getElementById("studentBirthEdit").value = birth;
-    document
-      .getElementById("buttonEdit")
-      .addEventListener("click", () => editStudent(userId));
-  }, 100);
+
+  document.getElementById("studentNameEdit").value = name;
+  document.getElementById("studentSurnameEdit").value = surname;
+  document.getElementById("studentGradeEdit").value = grade;
+  document.getElementById("studentBirthEdit").value = birth;
+  document.getElementById("buttonEdit").setAttribute("data-userId", userId);
 }
 
 function closeModalEditStudent() {
@@ -25,13 +21,14 @@ window.onclick = function (event) {
   }
 };
 
-async function editStudent(userId) {
+async function editStudent() {
   const token = localStorage.getItem("token");
   const usertype = localStorage.getItem("usertype");
   const studentName = document.getElementById("studentNameEdit").value;
   const studentSurname = document.getElementById("studentSurnameEdit").value;
   const studentGrade = document.getElementById("studentGradeEdit").value;
   const studentBirth = document.getElementById("studentBirthEdit").value;
+  const userId = document.getElementById("buttonEdit").getAttribute("data-userId");
 
   try {
     const response = await fetch(
