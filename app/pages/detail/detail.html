@@ -5,92 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="detail.css" />
     <link rel="stylesheet" href="../../assets/styles/global.css" />
-    <title>Perfil de usuario</title>
+    <title>Perfil de estudiante</title>
   </head>
-  <body class="background-image">
-    <div class="card-lateral">
-      <h2>Perfil de Usuario</h2>
-      <img src="../../assets/img/mujer.png" alt="Foto de usuario" />
-      <div id="studentInfo">
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <!-- Logo -->
+        <img src="https://placehold.co/100x100" alt="Logo" />
+        <!-- Sidebar -->
+        <h4>Perfil de usuario</h4>
+        <div id="studentInfo"></div>
+      </div>
+      <div class="main-content">
+        <!-- USER FEEDBACK -->
+        <div id="userFeedback"></div>
+        <div id="tableInfoContainer"></div>
+        <!-- ALLERGY CREATION MODAL -->
+        <div id="modal-detail-create-allergy" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModalAllergies()">&times;</span>
+            <h4 class="modal-title">Añadir Alergia</h4>
+            <form id="addAllergyForm">
+              <div class="form-group">
+                <label for="alergia">Alergia:</label>
+                <input
+                  type="text"
+                  id="alergia"
+                  name="alergia"
+                  placeholder="Introduce la alergia"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="medication">Medicación:</label>
+                <input
+                  type="text"
+                  id="medication"
+                  name="medication"
+                  placeholder="Introduce la medicación"
+                  required
+                />
+              </div>
+              <button
+                type="button"
+                class="execute-button"
+                onclick="createAllergy()"
+              >
+                Registrar alergia
+              </button>
+              <div id="errorForm" class="feedback"></div>
+            </form>
+          </div>
+        </div>
+        <!-- CRISIS CREATION MODAL -->
+        <div id="modal-detail-create-crisis" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModalCrisis()">&times;</span>
+            <h4 class="modal-title">Añadir Crisis</h4>
+            <form id="addCrisisForm">
+              <div class="form-group">
+                <label for="type">Tipo de crisis:</label>
+                <input
+                  type="text"
+                  id="type"
+                  name="type"
+                  placeholder="Introduce el tipo de crisis"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="timestamp">Fecha de la crisis:</label>
+                <input
+                  type="date"
+                  id="timestamp"
+                  name="timestamp"
+                  placeholder="Introduce la fecha de la crisis"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="information">Información adicional:</label>
+                <textarea
+                  id="information"
+                  name="information"
+                  placeholder="Introduce información adicional"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="allergy">Alergia:</label>
+                <select id="allergy" name="allergy" required></select>
+              </div>
+              <button
+                type="button"
+                class="execute-button"
+                onclick="createCrisis()"
+              >
+                Registrar crisis
+              </button>
+              <div id="errorForm" class="feedback"></div>
+            </form>
+          </div>
+        </div>
+        <!-- + Button with menu -->
+        <button class="plus-menu" onclick="toggleMenu()">+</button>
+        <ul class="speed-dial" id="speedDial">
+          <li class="speed-dial-item" onclick="openCreateAllergyModal()">
+            Crear alergia a este alumno
+          </li>
+          <li class="speed-dial-item" onclick="openCreateCrisisModal()">
+            Crear crisis a este alumno
+          </li>
+        </ul>
+        <script src="detail.js"></script>
+        <script src="detail-allergies.js"></script>
+        <script src="detail-crisis.js"></script>
       </div>
     </div>
-    <div class="main-content">
-    <div id="tableContainer"></div>
-    <!-- ALLERGY CREATION MODAL -->
-    <div id="modal-detail-create-allergy" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModalAllergies()">&times;</span>
-        <h2>Añadir Alergia</h2>
-        <form id="addAllergyForm">
-          <label for="alergia">Alergia:</label>
-          <input
-            type="text"
-            id="alergia"
-            name="alergia"
-            placeholder="Introduce la alergia"
-            required
-          />
-          <label for="medication">Medicación:</label>
-          <input
-            type="text"
-            id="medication"
-            name="medication"
-            placeholder="Introduce la medicación"
-            required
-          />
-          <button type="button" onclick="createAllergy()">Registrar alergia</button>
-          <div id="errorForm"></div>
-        </form>
-      </div>
-    </div>
-    <!-- CRISIS CREATION MODAL -->
-    <div id="modal-detail-create-crisis">
-      <div class="modal-content">
-        <span class="close" onclick="closeModalCrisis()">&times;</span>
-        <h2>Añadir Crisis</h2>
-        <form id="addCrisisForm">
-          <label for="type">Tipo de crisis:</label>
-          <input
-            type="text"
-            id="type"
-            name="type"
-            placeholder="Introduce el tipo de crisis"
-            required
-          />
-          <label for="timestamp">Fecha de la crisis:</label>
-          <input
-            type="date"
-            id="timestamp"
-            name="timestamp"
-            placeholder="Introduce la fecha de la crisis"
-            required
-          />
-          <label for="information">Información adicional:</label>
-          <textarea
-            id="information"
-            name="information"
-            placeholder="Introduce información adicional"
-            required
-          ></textarea>
-          <label for="allergy">Alergia:</label>
-          <select id="allergy" name="allergy" required>
-          </select>
-          <button type="button" onclick="createCrisis()">Registrar crisis</button>
-          <div id="errorForm"></div>
-        </form>
-      </div>
-    </div>
-    </div>
-    <!-- USER FEEDBACK -->
-    <div id="userFeedback"></div>
-    <!-- + Button with menu -->
-    <button class="plus-menu" onclick="toggleMenu()">+</button>
-    <ul class="speed-dial" id="speedDial">
-      <li class="speed-dial-item" onclick="openCreateAllergyModal()">Crear alergia a este alumno</li>
-      <li class="speed-dial-item" onclick="openCreateCrisisModal()">Crear crisis a este alumno</li>
-    </ul>
-      <script src="detail.js"></script>
-      <script src="detail-allergies.js"></script>
-      <script src="detail-crisis.js"></script>
   </body>
 </html>

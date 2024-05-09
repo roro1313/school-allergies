@@ -30,7 +30,6 @@ function createCrisis() {
     document.getElementById("errorForm").innerHTML = `<div style="background:#d46363;padding:3px;"><p>Por favor, complete todos los campos.</p></div>`;
     return;
   }
-
   const options = {
     method: "POST",
     headers: {
@@ -62,4 +61,47 @@ function createCrisis() {
       console.error("Error al realizar la solicitud:", error);
       userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Intente añadir la crisis más tarde</p></div>`;
     });
+}
+
+async function deleteCrisis(username, allergy, type) {
+  const token = localStorage.getItem("token");
+  const usertype = localStorage.getItem("usertype");
+  const userId = localStorage.getItem("userId");
+
+  try {
+    const response = await fetch(
+      "https://school-allergies.onrender.com/students/delete-crisis",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Usertype: usertype,
+        },
+        body: JSON.stringify({
+          username,
+          userId,
+          allergy,
+          type,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    const userFeedback = document.getElementById("userFeedback");
+
+    if (response.ok) {
+      console.log("Crisis borrada correctamente:", data);
+      userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Crisis borrada correctamente.</p></div>`;
+      setTimeout(() => {
+        userFeedback.innerHTML = "";
+        window.location.reload();
+      }, 1500);
+    } else {
+      console.log("Error al borrar la crisis:", data);
+      userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al borrar crisis.</p></div>`;
+    }
+  } catch (error) {
+    console.error("Error al borrar la crisis:", error);
+  }
 }

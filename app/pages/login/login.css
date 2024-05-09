@@ -1,32 +1,26 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Roboto", sans-serif;
-  height: 400px;
-  background-image: url("../../assets/img/fotofondo.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-color: #33475b;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
 }
 
-h4 {
-  font-size: 2em;
-}
-p {
-  font-size: 1.25;
+.card {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  width: 35%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+#errorMessage {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
 }

@@ -8,10 +8,6 @@ body, html {
 .container {
   display: flex;
   height: 100%;
-  background-image: url("../../assets/img/fondito.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .sidebar {
@@ -25,47 +21,4 @@ body, html {
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
-}
-
-h4 {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.search-input {
-  width: calc(100% - 100px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px;
-  box-sizing: border-box;
-}
-
-.search-btn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-tr:hover {
-  background-color: lightgrey;
-  cursor: pointer;
-}
-
-th {
-  background-color: #f2f2f2;
 }

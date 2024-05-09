@@ -55,8 +55,8 @@ function displayStudents(students) {
         <td ${onClick}>${student.allergies
           .map((allergyObj) => allergyObj.allergy)
           .join(", ")}</td>
-        <td><button onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
-        <td><button onclick="deleteStudent('${student.userId}')">🗑️</button></td>
+        <td style="text-align:center;"><button class="action-button" onclick="openEditStudentModal('${student.studentName}', '${student.studentSurname}', '${student.studentGrade}', '${student.studentBirth}', '${student.userId}')">✏️</button></td>
+        <td style="text-align:center;"><button class="action-button" onclick="deleteStudent('${student.userId}')">🗑️</button></td>
       </tr>`;
     tableBody.innerHTML += row;
   });
@@ -83,14 +83,15 @@ async function searchUsers() {
           Authorization: `Bearer ${token}`,
           Usertype: usertype,
         },
-        body: JSON.stringify({ userId: searchValue }),
+        body: JSON.stringify({ username: searchValue }),
       }
     );
 
     const data = await response.json();
 
-    if (response.ok) {
+    if (response.ok && Array.isArray(data.response)) {
       displayUsers(data.response);
+      console.log(data.response);
     } else {
       console.log(data.response); // Show error message if search fails
     }
@@ -101,15 +102,25 @@ async function searchUsers() {
 }
 
 function displayUsers(users) {
-  const tableBody = document.getElementById("tableBody");
+  const tableBody = document.getElementById("tableUsersBody");
   tableBody.innerHTML = "";
-  users.map((user) => {
+  users.forEach((user) => {
     const row =
       `<tr>
-        <td>${user.username}</td>
-        <td><button onclick="openEditUserModal('${user.username}', '${user.password}')">✏️</button></td>
-        <td><button onclick="deleteUser('${user.username}')">🗑️</button></td>
+        <td style="width:70%;">${user.username}</td>
+        <td style="width:15%;text-align:center;"><button class="action-button" onclick="openEditUserModal('${user.username}', '${user.password}', '${user.usertype}')">✏️</button></td>
+        <td style="width:15%;text-align:center;><button class="action-button" onclick="deleteUser('${user.username}')">🗑️</button></td>
       </tr>`;
-    tableBody.innerHTML += row;
+    tableBody.insertAdjacentHTML("beforeend", row);
   });
+}
+
+// CAMBIO SECCION
+function showSection(sectionName) {
+  const sections = document.querySelectorAll('.main-content > section');
+  sections.forEach(section => {
+    section.classList.add('hidden');
+  });
+  const selectedSection = document.getElementById(`${sectionName}-section`);
+  selectedSection.classList.remove('hidden');
 }

@@ -53,3 +53,44 @@ function createAllergy() {
       userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Intente añadir la alergia más tarde</p></div>`;
     });
 }
+
+async function deleteAllergy(allergy) {
+  const token = localStorage.getItem("token");
+  const usertype = localStorage.getItem("usertype");
+  const userId = localStorage.getItem("userId");
+
+  try {
+    const response = await fetch(
+      "https://school-allergies.onrender.com/students/delete-allergy",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Usertype: usertype,
+        },
+        body: JSON.stringify({
+          userId,
+          allergy,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    const userFeedback = document.getElementById("userFeedback");
+
+    if (response.ok) {
+      console.log("Alergiaa borrada correctamente:", data);
+      userFeedback.innerHTML = `<div style="background:#90ee90;padding:5px;"><p>Alergia borrada correctamente.</p></div>`;
+      setTimeout(() => {
+        userFeedback.innerHTML = "";
+        window.location.reload();
+      }, 1500);
+    } else {
+      console.log("Error al borrar la alergia:", data);
+      userFeedback.innerHTML = `<div style="background:#d46363;padding:5px;"><p>Error al borrar alergia.</p></div>`;
+    }
+  } catch (error) {
+    console.error("Error al borrar la alergia:", error);
+  }
+}

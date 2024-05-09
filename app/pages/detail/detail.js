@@ -41,13 +41,9 @@ async function studentDetail() {
     const data = await response.json();
 
     if (response.ok) {
-      // Store allergies to show them in a select
-      localStorage.setItem("select", data.response[0].allergies.map((allergy) => allergy.allergy))
-      // Show tables with allergies info
-      displayTables(data.response);
       // Show student info in sidebar
       const studentInfo = document.getElementById("studentInfo");
-      studentInfo.innerHTML= `
+      studentInfo.innerHTML = `
       <p class="info-label">Nombre:</p>
       <p class="info-detail">${data.response[0].studentName}</p>
       <p class="info-label">Apellido:</p>
@@ -57,53 +53,76 @@ async function studentDetail() {
       <p class="info-label">Curso:</p>
       <p class="info-detail">${data.response[0].studentGrade}</p>
       `;
+      // Store allergies to show them in a select
+      localStorage.setItem(
+        "select",
+        data.response[0].allergies.map((allergy) => allergy.allergy)
+      );
+      // Show tables with allergies info
+      displayTables(data.response);
     } else {
       console.log(data.response); // Show error message if search fails
+      const errorMessage = document.getElementById("errorMessage");
+      errorMessage.innerText = "Error: " + data.response;
     }
   } catch (error) {
     console.error(error);
-    console.error("An error occurred. Please try again later."); // Show error message
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.innerText = "An error occurred. Please try again later.";
   }
 }
 
 function displayTables(students) {
-  const tableContainer = document.getElementById("tableContainer");
+  const usertype = localStorage.getItem("usertype");
+  const tableContainer = document.getElementById("tableInfoContainer");
   tableContainer.innerHTML = "";
 
   students.forEach((student) => {
     // For each allergy print a table with allergy detail
     const tableHTML = `
-        <h1>${student.studentName}'s allergies</h1>
+        <h3>Estudiante: ${student.studentName} ${student.studentSurname}</h3>
         ${student.allergies
           .map(
             (allergy) => `
-          <h3>${allergy.allergy} - ${allergy.medication}</h3>
-          <table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Alergia: ${allergy.allergy}</th>
+                  <th colspan="2">Medicación: ${allergy.medication}</th>
+                  ${usertype === "admin" ? 
+                    `<th style="text-align:center;><button class="action-button" onclick="deleteAllergy('${allergy.allergy}')">❌</button></th>`: ``}
+                </tr>
+              </thead>
             <thead>
               <tr>
                 <th>Crisis</th>
                 <th>Fecha</th>
-                <th>Información</th>
+                <th colspan="2">Información</th>
               </tr>
             </thead>
             <tbody>
-              ${allergy.crisis
-                .map(
-                  (crisis) => `
-                <tr>
-                  <td>${crisis.type}</td>
-                  <td>${crisis.timestamp}</td>
-                  <td>${crisis.information}</td>
-                </tr>
-              `
-                )
-                .join("")}
+              ${allergy.crisis.length === 0
+                  ? `<tr><td colspan="3">Esta alergia no tiene registradas crisis</td>${
+                      usertype === "admin" ? "<td></td>" : ""
+                    }</tr>`
+                  : allergy.crisis.map((crisis) => 
+                    `<tr>
+                        <td>${crisis.type}</td>
+                        <td>${crisis.timestamp}</td>
+                        <td>${crisis.information}</td>
+                        ${
+                          usertype === "admin" &&
+                          `<td style="text-align:center;"><button class="action-button" onclick="deleteCrisis('${student.username}','${allergy.allergy}','${crisis.type}')">🗑️</button></td>`
+                        }
+                      </tr>`).join("")}
             </tbody>
           </table>
         `
           )
           .join("")}
       `;
-    tableContainer.innerHTML += tableHTML;
+    const tableElement = document.createElement("div");
+    tableElement.innerHTML = tableHTML;
+    tableContainer.appendChild(tableElement);
   });
 }
