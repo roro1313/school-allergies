@@ -21,35 +21,42 @@
         <li></li>
         <li></li>
       </ul>
-    <div class="card">
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="username">Nombre de usuario:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Introduce el nombre de usuario"
-            required
+      <div class="card">
+        <div class="logo-login">
+          <img
+            src="../../assets/img/logo-mini.png"
+            alt="Logo AlergiApp"
           />
         </div>
-        <div class="form-group">
-          <label for="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Introduce la contraseña"
-            required
-          />
-        </div>
-        <button type="button" class="execute-button" onclick="login()">
-          Iniciar sesión
-        </button>
-        <div id="errorMessage" class="feedback"></div>
-      </form>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Nombre de usuario:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Introduce el nombre de usuario"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Introduce la contraseña"
+              required
+            />
+          </div>
+          <button type="button" class="execute-button" onclick="login()">
+            Iniciar sesión
+          </button>
+          <div id="errorMessage" class="feedback"></div>
+        </form>
+      </div>
     </div>
-  </div>
     <script src="login.js"></script>
   </body>
 </html>
