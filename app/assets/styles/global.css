@@ -417,3 +417,21 @@ th {
   margin: 0.5rem;
   text-align: center;
 }
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 25%;
+  background-color: #82eefa;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
