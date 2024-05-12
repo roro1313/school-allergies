@@ -12,34 +12,52 @@
   <body>
     <div class="container">
       <div class="sidebar">
-          <!-- Logo -->
-          <img src="https://placehold.co/100x100" alt="Logo">
-          <!-- Sidebar -->
-          <h4>Bienvenido</h4>
-          <p>Aquí puedes realizar búsqueda de usuarios para poder consultar su perfil completo</p>
+        <!-- Logo -->
+        <img
+          src="../../assets/img/logo-mini.png"
+          alt="Logo AlergiApp"
+          class="logo"
+        />
+        <!-- Sidebar -->
+        <h4>Bienvenido</h4>
+        <p>
+          Aquí puedes realizar búsqueda de estudiantes para poder consultar su
+          perfil completo
+        </p>
       </div>
       <div class="main-content">
-          <!-- Main title -->
-          <h1>Buscador</h1>
-          <!-- Search input -->
-          <form id="searchForm">
-              <input type="text" id="searchInput" class="search-input" placeholder="Escribe para buscar usuarios">
-              <button type="button" onclick="searchStudents()">🔍</button>
-          </form>
-          <div id="errorMessage"></div>
-          <!-- Results table -->
-          <table id="resultsTable">
-              <thead>
-                  <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Alergias</th>
-                  </tr>
-              </thead>
-              <tbody id="tableBody">
-                  <!-- Search results will be printed here from JavaScript -->
-              </tbody>
-          </table>
+        <!-- Main title -->
+        <h1>Buscador de estudiantes</h1>
+        <!-- Search input -->
+        <form id="searchForm" class="search-form">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Escribe para buscar estudiantes"
+          />
+          <button
+            type="button"
+            onclick="searchStudents()"
+            class="search-button"
+          >
+            🔍
+          </button>
+        </form>
+        <div id="errorMessage"></div>
+        <!-- Results table -->
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Alergias</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Search results will be printed here from JavaScript -->
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
